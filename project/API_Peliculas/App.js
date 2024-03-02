@@ -1,20 +1,9 @@
-import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View } from "react-native";
+import { BuscadorPeliculas } from "./src/components/BuscadorPeliculas";
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Hola mundo!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <>
+      <BuscadorPeliculas />
+    </>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
