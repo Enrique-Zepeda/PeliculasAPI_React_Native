@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   View,
   Text,
@@ -13,6 +13,23 @@ export const RegisterScreen = ({ navigation }) => {
     console.log("Registrado");
   };
 
+  const initialState = {
+    //objeto
+    name: "",
+    email: "",
+    password: "",
+  };
+
+  const [form, setForm] = useState(initialState);
+
+  const handleInput = (value, name) => {
+    setForm({ ...form, [name]: value });
+  };
+
+  const saveUser = () => {
+    console.log(form);
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.logoContainer}>
@@ -25,14 +42,26 @@ export const RegisterScreen = ({ navigation }) => {
         />
       </View>
       <Text style={styles.title}>Registrarse</Text>
-      <TextInput style={styles.input} placeholder="Nombre" />
-      <TextInput style={styles.input} placeholder="Correo" />
+      <TextInput
+        style={styles.input}
+        placeholder="Nombre"
+        onChangeText={(value) => handleInput(value, "name")}
+        value={form.name}
+      />
+      <TextInput
+        style={styles.input}
+        placeholder="Correo"
+        onChangeText={(value) => handleInput(value, "email")}
+        value={form.email}
+      />
       <TextInput
         style={styles.input}
         placeholder="Contraseña"
         secureTextEntry
+        onChangeText={(value) => handleInput(value, "password")}
+        value={form.password}
       />
-      <Pressable style={styles.button} onPress={handlePress}>
+      <Pressable style={styles.button} onPress={saveUser}>
         <Text style={styles.textPressable}>Registrarse</Text>
       </Pressable>
     </View>
