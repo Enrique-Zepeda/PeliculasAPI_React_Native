@@ -6,7 +6,21 @@ import {
   Pressable,
   StyleSheet,
   Image,
+  Alert,
 } from "react-native";
+//importar firebase
+import appFirebase from "../../credenciales";
+import {
+  getFirestore,
+  collection,
+  addDoc,
+  getDoc,
+  doc,
+  deleteDoc,
+  setDoc,
+} from "firebase/firestore";
+
+const db = getFirestore(appFirebase);
 
 export const RegisterScreen = ({ navigation }) => {
   const handlePress = () => {
@@ -26,8 +40,16 @@ export const RegisterScreen = ({ navigation }) => {
     setForm({ ...form, [name]: value });
   };
 
-  const saveUser = () => {
-    console.log(form);
+  const saveUser = async () => {
+    try {
+      await addDoc(collection(db, "Users"), {
+        ...form,
+      });
+      Alert.alert("Guardado con exito");
+      navigation.navigate("login");
+    } catch (error) {
+      console.error(error, " ha ocurrido un error");
+    }
   };
 
   return (
