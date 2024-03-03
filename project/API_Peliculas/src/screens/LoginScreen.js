@@ -1,5 +1,12 @@
 import React from "react";
-import { View, Text, Button, TextInput, StyleSheet, Image } from "react-native";
+import {
+  View,
+  Text,
+  TextInput,
+  StyleSheet,
+  Image,
+  Pressable,
+} from "react-native";
 
 export const LoginScreen = ({ navigation }) => {
   return (
@@ -10,19 +17,29 @@ export const LoginScreen = ({ navigation }) => {
           source={{
             uri: "https://filmapp.app/wp-content/uploads/2022/09/film-app-apk.png",
           }}
+          resizeMode="contain"
         />
       </View>
       <Text style={styles.title}>Inicio de Sesion</Text>
-      <TextInput placeholder="Email" />
-      <TextInput placeholder="Password" secureTextEntry />
-      <Button
-        title="Iniciar Sesion"
-        onPress={() => navigation.navigate("Serch")} //En la version 3 tendremos que llamar a este navigate HomeScreen
+      <TextInput style={styles.input} placeholder="Correo" />
+      <TextInput
+        style={styles.input}
+        placeholder="Contraseña"
+        secureTextEntry
       />
-      <Button
-        title="Registrarse"
+      {/* En la version 3 tendremos que llamar a este navigate HomeScreen */}
+      <Pressable
+        style={styles.button}
+        onPress={() => navigation.navigate("Serch")}
+      >
+        <Text style={styles.textPressable}>Iniciar Sesion</Text>
+      </Pressable>
+      <Pressable
+        style={styles.button}
         onPress={() => navigation.navigate("Register")}
-      />
+      >
+        <Text style={styles.textPressable}>Registrarse</Text>
+      </Pressable>
     </View>
   );
 };
@@ -38,6 +55,12 @@ const styles = StyleSheet.create({
     fontSize: 32,
     fontWeight: "bold",
     marginBottom: 20,
+    color: "#FFFFFF",
+    textAlign: "center",
+  },
+  textPressable: {
+    fontSize: 20,
+    fontWeight: "bold",
     color: "#FFFFFF",
     textAlign: "center",
   },
@@ -79,7 +102,6 @@ const styles = StyleSheet.create({
   logo: {
     width: 200,
     height: 100,
-    resizeMode: "contain",
     marginTop: 50,
   },
   buttonContainer: {
@@ -98,7 +120,6 @@ const styles = StyleSheet.create({
   logoApp: {
     width: 40,
     height: 40,
-    resizeMode: "contain",
     marginHorizontal: 10,
   },
 });
