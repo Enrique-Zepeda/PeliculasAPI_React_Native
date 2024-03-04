@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   View,
   Text,
@@ -6,9 +6,42 @@ import {
   StyleSheet,
   Image,
   Pressable,
+  Alert,
 } from "react-native";
 
+// Importar Firebase y funciones de autenticación
+import appFirebase from "../../credenciales";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+
+const auth = getAuth(appFirebase);
+
 export const LoginScreen = ({ navigation }) => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleLogin = async () => {
+    try {
+      const userCredential = await signInWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      console.log(userCredential); // Puedes remover esto una vez confirmado que funciona
+      Alert.alert("Inicio de sesión exitoso");
+      navigation.navigate("search"); //cambiar esta ruta despues a home
+    } catch (error) {
+      let errorMessage = "Falló el inicio de sesión"; // Mensaje por defecto
+      if (error.code === "auth/user-not-found") {
+        errorMessage = "No se encontró el usuario";
+      } else if (error.code === "auth/wrong-password") {
+        errorMessage = "Contraseña incorrecta";
+      } else if (error.code === "auth/invalid-email") {
+        errorMessage = "Formato de correo electrónico inválido";
+      }
+      Alert.alert("Error", errorMessage);
+    }
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.logoContainer}>
@@ -21,17 +54,21 @@ export const LoginScreen = ({ navigation }) => {
         />
       </View>
       <Text style={styles.title}>Inicio de Sesion</Text>
-      <TextInput style={styles.input} placeholder="Correo" />
+      <TextInput
+        style={styles.input}
+        placeholder="Correo"
+        onChangeText={setEmail}
+        value={email}
+      />
       <TextInput
         style={styles.input}
         placeholder="Contraseña"
         secureTextEntry
+        onChangeText={setPassword}
+        value={password}
       />
       {/* En la version 3 tendremos que llamar a este navigate HomeScreen */}
-      <Pressable
-        style={styles.button}
-        onPress={() => navigation.navigate("Serch")}
-      >
+      <Pressable style={styles.button} onPress={handleLogin}>
         <Text style={styles.textPressable}>Iniciar Sesion</Text>
       </Pressable>
       <Pressable

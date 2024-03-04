@@ -10,23 +10,13 @@ import {
 } from "react-native";
 //importar firebase
 import appFirebase from "../../credenciales";
-import {
-  getFirestore,
-  collection,
-  addDoc,
-  getDoc,
-  doc,
-  deleteDoc,
-  setDoc,
-} from "firebase/firestore";
+import { getFirestore, collection, addDoc } from "firebase/firestore";
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 
 const db = getFirestore(appFirebase);
+const auth = getAuth(appFirebase);
 
 export const RegisterScreen = ({ navigation }) => {
-  const handlePress = () => {
-    console.log("Registrado");
-  };
-
   const initialState = {
     //objeto
     name: "",
@@ -42,13 +32,25 @@ export const RegisterScreen = ({ navigation }) => {
 
   const saveUser = async () => {
     try {
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        form.email,
+        form.password
+      );
+      const user = userCredential.user;
+      console.log(user);
+
       await addDoc(collection(db, "Users"), {
-        ...form,
+        uid: user.uid,
+        name: form.name,
+        email: form.email,
       });
-      Alert.alert("Guardado con exito");
+
+      Alert.alert("Registro exitoso");
       navigation.navigate("login");
     } catch (error) {
-      console.error(error, " ha ocurrido un error");
+      console.error(error);
+      Alert.alert("Error", "Ha ocurrido un error durante el registro");
     }
   };
 

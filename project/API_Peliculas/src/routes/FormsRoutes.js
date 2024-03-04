@@ -10,15 +10,15 @@ export const FormsRoutes = () => {
     <Stack.Navigator>
       <Stack.Screen
         name="login"
-        options={{ title: "Iniciar Sesión" }}
+        options={{ headerShown: false }}
         component={LoginScreen}
       />
       <Stack.Screen
         name="Register"
-        options={{ title: "Registrarse" }}
+        options={{ title: "Volver" }}
         component={RegisterScreen}
       />
-      <Stack.Screen name="Serch" component={BuscadorPeliculas} />
+      <Stack.Screen name="search" component={BuscadorPeliculas} />
       {/*en la version 3 tendremos que llamar a este componenre HomeScren y desde ahi crear un drawer para la creacion de los demas tabs ahoria por default solo navega al buscador de peliculas  */}
     </Stack.Navigator>
   );
