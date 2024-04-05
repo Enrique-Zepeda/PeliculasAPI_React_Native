@@ -78,9 +78,6 @@ export const RegisterScreen = ({ navigation }) => {
       if (error.code === "auth/missing-email") {
         setError("Email vacio");
       }
-      if (error.code === "auth/weak-password") {
-        setError("La contraseña debe contener almenos 6 caracteres");
-      }
       if (error.code === "auth/email-already-in-use") {
         setError("El correo ya esta en uso");
       }

@@ -30,6 +30,7 @@ export const styles = StyleSheet.create({
     paddingLeft: 10,
     backgroundColor: "#636363",
     elevation: 2,
+    paddingRight: 50,
   },
   button: {
     width: "80%",
@@ -77,5 +78,15 @@ export const styles = StyleSheet.create({
     width: 40,
     height: 40,
     marginHorizontal: 10,
+  },
+  inputContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  icon: {
+    position: "absolute",
+    right: 10,
+    paddingBottom: 18,
   },
 });

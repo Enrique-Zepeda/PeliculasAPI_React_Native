@@ -1,8 +1,16 @@
 import React, { useState } from "react";
-import { View, Text, TextInput, Image, Pressable } from "react-native";
+import {
+  View,
+  Text,
+  TextInput,
+  Image,
+  Pressable,
+  TouchableOpacity,
+} from "react-native";
 import { Validaciones } from "../components/Validaciones";
 import { styles } from "../styles/LoginScreenStyles";
 import { useAuth } from "../context/AuthContext";
+import { Ionicons } from "@expo/vector-icons";
 export const LoginScreen = ({ navigation }) => {
   const { login } = useAuth();
 
@@ -10,7 +18,7 @@ export const LoginScreen = ({ navigation }) => {
     email: "",
     password: "",
   });
-
+  const [hidePassword, setHidePassword] = useState(true);
   const [error, setError] = useState();
 
   const handleChange = (name, value) => {
@@ -76,13 +84,25 @@ export const LoginScreen = ({ navigation }) => {
         onChangeText={(value) => handleChange("email", value)}
         value={user.email}
       />
-      <TextInput
-        style={styles.input}
-        placeholder="Contraseña"
-        secureTextEntry
-        onChangeText={(value) => handleChange("password", value)}
-        value={user.password}
-      />
+      <View style={styles.inputContainer}>
+        <TextInput
+          style={styles.input}
+          placeholder="Contraseña"
+          secureTextEntry={hidePassword}
+          onChangeText={(value) => handleChange("password", value)}
+          value={user.password}
+        />
+        <TouchableOpacity
+          onPress={() => setHidePassword(!hidePassword)}
+          style={styles.icon}
+        >
+          <Ionicons
+            name={hidePassword ? "eye-off" : "eye"}
+            size={24}
+            color="#6C63FF"
+          />
+        </TouchableOpacity>
+      </View>
       {/* En la version 3 tendremos que llamar a este navigate HomeScreen */}
       <Pressable style={styles.button} onPress={handleLogin}>
         <Text style={styles.textPressable}>Iniciar Sesion</Text>
