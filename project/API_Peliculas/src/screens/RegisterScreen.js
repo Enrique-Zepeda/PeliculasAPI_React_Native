@@ -1,15 +1,27 @@
 import React, { useState } from "react";
-import { View, Text, TextInput, Pressable, Image, Alert } from "react-native";
+import {
+  View,
+  Text,
+  TextInput,
+  Pressable,
+  Image,
+  Alert,
+  TouchableOpacity,
+} from "react-native";
 import { Validaciones } from "../components/Validaciones";
 import { styles } from "../styles/RegisterScreenStyles";
 import { useAuth } from "../context/AuthContext";
+import { Ionicons } from "@expo/vector-icons";
 
 export const RegisterScreen = ({ navigation }) => {
   const [user, setUser] = useState({
     name: "",
     email: "",
     password: "",
+    password2: "",
   });
+  const [hidePassword, setHidePassword] = useState(true);
+  const [hidePassword2, setHidePassword2] = useState(true);
   const [error, setError] = useState("");
   const { signup } = useAuth();
 
@@ -44,6 +56,10 @@ export const RegisterScreen = ({ navigation }) => {
       setError(
         "La contraseña debe tener al menos 8 caracteres, incluir números y almenos una letra mayúscula."
       );
+      return;
+    }
+    if (user.password !== user.password2) {
+      setError("Las contraseñas no coinciden.");
       return;
     }
     try {
@@ -96,13 +112,44 @@ export const RegisterScreen = ({ navigation }) => {
         onChangeText={(value) => handleInputChange("email", value)}
         value={user.email}
       />
-      <TextInput
-        style={styles.input}
-        placeholder="Contraseña"
-        secureTextEntry
-        onChangeText={(value) => handleInputChange("password", value)}
-        value={user.password}
-      />
+      <View style={styles.inputContainer}>
+        <TextInput
+          style={styles.input}
+          placeholder="Contraseña"
+          secureTextEntry={hidePassword}
+          onChangeText={(value) => handleInputChange("password", value)}
+          value={user.password}
+        />
+        <TouchableOpacity
+          onPress={() => setHidePassword(!hidePassword)}
+          style={styles.icon}
+        >
+          <Ionicons
+            name={hidePassword ? "eye-off" : "eye"}
+            size={24}
+            color="#6C63FF"
+          />
+        </TouchableOpacity>
+      </View>
+      <View style={styles.inputContainer}>
+        <TextInput
+          style={styles.input}
+          placeholder="Contraseña"
+          secureTextEntry={hidePassword2}
+          onChangeText={(value) => handleInputChange("password2", value)}
+          value={user.password2}
+        />
+        <TouchableOpacity
+          onPress={() => setHidePassword2(!hidePassword2)}
+          style={styles.icon}
+        >
+          <Ionicons
+            name={hidePassword2 ? "eye-off" : "eye"}
+            size={24}
+            color="#6C63FF"
+          />
+        </TouchableOpacity>
+      </View>
       <Pressable style={styles.button} onPress={saveUser}>
         <Text style={styles.textPressable}>Registrarse</Text>
       </Pressable>

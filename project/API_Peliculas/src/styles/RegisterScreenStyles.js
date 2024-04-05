@@ -30,6 +30,7 @@ export const styles = StyleSheet.create({
     paddingLeft: 10,
     backgroundColor: "#636363",
     elevation: 2,
+    paddingRight: 50,
   },
   button: {
     width: "80%",
@@ -40,20 +41,6 @@ export const styles = StyleSheet.create({
     borderRadius: 5,
     marginTop: 20,
     elevation: 3,
-  },
-  inputContainer: {
-    width: "80%",
-    flexDirection: "row",
-    alignItems: "center",
-    marginBottom: 20,
-  },
-  iconContainer: {
-    paddingRight: 10,
-  },
-  buttonText: {
-    color: "#fff",
-    fontSize: 18,
-    fontWeight: "bold",
   },
   logo: {
     width: 200,
@@ -73,9 +60,14 @@ export const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
   },
-  logoApp: {
-    width: 40,
-    height: 40,
-    marginHorizontal: 10,
+  inputContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  icon: {
+    position: "absolute",
+    right: 10,
+    paddingBottom: 18,
   },
 });
