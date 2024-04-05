@@ -6,39 +6,53 @@ import {
   StyleSheet,
   Image,
   Pressable,
-  Alert,
 } from "react-native";
-
-// Importar Firebase y funciones de autenticación
-import appFirebase from "../../credenciales";
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-
-const auth = getAuth(appFirebase);
-
+import { useAuth } from "../context/AuthContext";
 export const LoginScreen = ({ navigation }) => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const { login } = useAuth();
+
+  const [user, setUser] = useState({
+    email: "",
+    password: "",
+  });
+
+  const [error, setError] = useState();
+
+  const handleChange = (name, value) => {
+    setUser({ ...user, [name]: value });
+  };
 
   const handleLogin = async () => {
+    setError("");
     try {
-      const userCredential = await signInWithEmailAndPassword(
-        auth,
-        email,
-        password
-      );
-      console.log(userCredential); // Puedes remover esto una vez confirmado que funciona
-      Alert.alert("Inicio de sesión exitoso");
-      navigation.navigate("search"); //cambiar esta ruta despues a home
+      await login(user.email, user.password);
+      navigation.navigate("search");
     } catch (error) {
-      let errorMessage = "Falló el inicio de sesión"; // Mensaje por defecto
-      if (error.code === "auth/user-not-found") {
-        errorMessage = "No se encontró el usuario";
-      } else if (error.code === "auth/wrong-password") {
-        errorMessage = "Contraseña incorrecta";
-      } else if (error.code === "auth/invalid-email") {
-        errorMessage = "Formato de correo electrónico inválido";
+      console.log(error.code);
+      if (error.code === "auth/missing-password") {
+        setError("Porfavor ingresa tu contraseña");
       }
-      Alert.alert("Error", errorMessage);
+      if (error.code === "auth/invalid-email") {
+        setError("Correo invalido");
+      }
+      if (error.code === "auth/missing-email") {
+        setError("Porfavor ingresa un correo");
+      }
+      if (error.code === "auth/weak-password") {
+        setError("La contraseña debe contener almenos 6 caracteres");
+      }
+      if (error.code === "auth/email-already-in-use") {
+        setError("El correo ya esta en uso");
+      }
+      if (error.code === "auth/invalid-credential") {
+        setError("Credenciales invalidas");
+      }
+      if (error.code === "auth/too-many-requests") {
+        setError("Demasiados intenos ¿Olvidaste la contraseña?");
+      }
+      if (error.message === "auth/email-verification") {
+        setError("Verifica tu correo");
+      }
     }
   };
 
@@ -57,15 +71,15 @@ export const LoginScreen = ({ navigation }) => {
       <TextInput
         style={styles.input}
         placeholder="Correo"
-        onChangeText={setEmail}
-        value={email}
+        onChangeText={(value) => handleChange("email", value)}
+        value={user.email}
       />
       <TextInput
         style={styles.input}
         placeholder="Contraseña"
         secureTextEntry
-        onChangeText={setPassword}
-        value={password}
+        onChangeText={(value) => handleChange("password", value)}
+        value={user.password}
       />
       {/* En la version 3 tendremos que llamar a este navigate HomeScreen */}
       <Pressable style={styles.button} onPress={handleLogin}>
