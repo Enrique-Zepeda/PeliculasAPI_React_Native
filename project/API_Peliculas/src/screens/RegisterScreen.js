@@ -8,49 +8,34 @@ import {
   Image,
   Alert,
 } from "react-native";
-//importar firebase
-import appFirebase from "../../credenciales";
-import { getFirestore, collection, addDoc } from "firebase/firestore";
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-
-const db = getFirestore(appFirebase);
-const auth = getAuth(appFirebase);
+import { useAuth } from "../context/AuthContext";
 
 export const RegisterScreen = ({ navigation }) => {
-  const initialState = {
-    //objeto
+  const [user, setUser] = useState({
     name: "",
     email: "",
     password: "",
-  };
+  });
+  const [error, setError] = useState("");
+  const { signup } = useAuth();
 
-  const [form, setForm] = useState(initialState);
-
-  const handleInput = (value, name) => {
-    setForm({ ...form, [name]: value });
+  const handleInputChange = (name, value) => {
+    setUser({ ...user, [name]: value });
   };
 
   const saveUser = async () => {
+    setError("");
     try {
-      const userCredential = await createUserWithEmailAndPassword(
-        auth,
-        form.email,
-        form.password
-      );
-      const user = userCredential.user;
-      console.log(user);
-
-      await addDoc(collection(db, "Users"), {
-        uid: user.uid,
-        name: form.name,
-        email: form.email,
-      });
-
+      await signup(user.email, user.password, user.name);
       Alert.alert("Registro exitoso");
       navigation.navigate("login");
     } catch (error) {
       console.error(error);
-      Alert.alert("Error", "Ha ocurrido un error durante el registro");
+      setError(error.message);
+      Alert.alert(
+        "Error",
+        "Ha ocurrido un error durante el registro: " + error.message
+      );
     }
   };
 
@@ -69,21 +54,21 @@ export const RegisterScreen = ({ navigation }) => {
       <TextInput
         style={styles.input}
         placeholder="Nombre"
-        onChangeText={(value) => handleInput(value, "name")}
-        value={form.name}
+        onChangeText={(value) => handleInputChange("name", value)}
+        value={user.name}
       />
       <TextInput
         style={styles.input}
         placeholder="Correo"
-        onChangeText={(value) => handleInput(value, "email")}
-        value={form.email}
+        onChangeText={(value) => handleInputChange("email", value)}
+        value={user.email}
       />
       <TextInput
         style={styles.input}
         placeholder="Contraseña"
         secureTextEntry
-        onChangeText={(value) => handleInput(value, "password")}
-        value={form.password}
+        onChangeText={(value) => handleInputChange("password", value)}
+        value={user.password}
       />
       <Pressable style={styles.button} onPress={saveUser}>
         <Text style={styles.textPressable}>Registrarse</Text>

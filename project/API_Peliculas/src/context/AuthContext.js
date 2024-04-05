@@ -9,7 +9,8 @@ import {
   sendPasswordResetEmail,
   sendEmailVerification,
 } from "firebase/auth";
-import { auth } from "../../credenciales";
+import { collection, addDoc } from "firebase/firestore";
+import { auth, db } from "../../credenciales";
 
 export const authContext = createContext();
 
@@ -22,7 +23,7 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  const signup = async (email, password) => {
+  const signup = async (email, password, name) => {
     try {
       const userCredential = await createUserWithEmailAndPassword(
         auth,
@@ -30,6 +31,11 @@ export const AuthProvider = ({ children }) => {
         password
       );
       await sendEmailVerification(userCredential.user);
+      await addDoc(collection(db, "Users"), {
+        uid: userCredential.user.uid,
+        name: name,
+        email: email,
+      });
     } catch (error) {
       console.error("Ha ocurrido un error durante el registro:", error.message);
     }
