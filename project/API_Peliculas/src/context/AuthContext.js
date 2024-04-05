@@ -38,6 +38,7 @@ export const AuthProvider = ({ children }) => {
       });
     } catch (error) {
       console.error("Ha ocurrido un error durante el registro:", error.message);
+      throw error;
     }
   };
 

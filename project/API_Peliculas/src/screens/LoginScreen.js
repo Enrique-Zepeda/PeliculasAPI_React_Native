@@ -19,6 +19,10 @@ export const LoginScreen = ({ navigation }) => {
 
   const handleLogin = async () => {
     setError("");
+    if (!user.email || !user.password) {
+      setError("Todos los campos son obligatorios.");
+      return;
+    }
     try {
       await login(user.email, user.password);
       navigation.navigate("search");
