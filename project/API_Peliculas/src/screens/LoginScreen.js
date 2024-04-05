@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { View, Text, TextInput, Image, Pressable } from "react-native";
+import { Validaciones } from "../components/Validaciones";
 import { styles } from "../styles/LoginScreenStyles";
 import { useAuth } from "../context/AuthContext";
 export const LoginScreen = ({ navigation }) => {
@@ -62,6 +63,9 @@ export const LoginScreen = ({ navigation }) => {
         />
       </View>
       <Text style={styles.title}>Inicio de Sesion</Text>
+
+      {error && <Validaciones message={error} />}
+
       <TextInput
         style={styles.input}
         placeholder="Correo"
