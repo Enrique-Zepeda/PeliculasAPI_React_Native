@@ -12,7 +12,7 @@ import { styles } from "../styles/LoginScreenStyles";
 import { useAuth } from "../context/AuthContext";
 import { Ionicons } from "@expo/vector-icons";
 export const LoginScreen = ({ navigation }) => {
-  const { login } = useAuth();
+  const { login, loginWithGoogle } = useAuth();
 
   const [user, setUser] = useState({
     email: "",
@@ -60,6 +60,15 @@ export const LoginScreen = ({ navigation }) => {
       if (error.message === "auth/email-verification") {
         setError("Verifica tu correo");
       }
+    }
+  };
+
+  const googleLogin = async () => {
+    try {
+      await loginWithGoogle();
+      navigation.navigate("search");
+    } catch (error) {
+      console.log(error, "ha ocurrido un error");
     }
   };
 
@@ -113,6 +122,17 @@ export const LoginScreen = ({ navigation }) => {
       >
         <Text style={styles.textPressable}>Registrarse</Text>
       </Pressable>
+      <View>
+        <TouchableOpacity onPress={googleLogin}>
+          <Image
+            style={styles.logo}
+            source={{
+              uri: "https://cdn4.iconfinder.com/data/icons/social-media-2210/24/Google-512.png",
+            }}
+            resizeMode="contain"
+          />
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };

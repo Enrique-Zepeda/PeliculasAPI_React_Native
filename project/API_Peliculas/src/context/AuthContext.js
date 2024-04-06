@@ -1,11 +1,12 @@
 import { createContext, useContext, useEffect, useState } from "react";
+import * as AuthSession from "expo-auth-session";
+import * as Google from "expo-auth-session/providers/google";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   onAuthStateChanged,
   signOut,
   GoogleAuthProvider,
-  signInWithPopup,
   sendPasswordResetEmail,
   sendEmailVerification,
 } from "firebase/auth";
@@ -19,10 +20,16 @@ export const useAuth = () => {
   return context;
 };
 
+const googleConfig = {
+  clientId:
+    "44597801307-7nlmj6k528knbe2ff94h238qt8kb62eg.apps.googleusercontent.com",
+};
+
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
-
+  const [request, response, promptAsync] =
+    Google.useIdTokenAuthRequest(googleConfig);
   const signup = async (email, password, name) => {
     try {
       const userCredential = await createUserWithEmailAndPassword(
@@ -61,11 +68,24 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  const logout = () => signOut(auth);
+  useEffect(() => {
+    // Maneja la respuesta aquí, fuera de la función async.
+    if (response?.type === "success") {
+      const { id_token } = response.params;
+      const credential = GoogleAuthProvider.credential(id_token);
+      signInWithCredential(auth, credential)
+        .then(() => {
+          // Haz algo después de iniciar sesión exitosamente.
+        })
+        .catch((error) => {
+          // Maneja los errores aquí.
+          console.error(error);
+        });
+    }
+  }, [response]);
 
   const loginWithGoogle = () => {
-    const googleProvider = new GoogleAuthProvider();
-    return signInWithPopup(auth, googleProvider);
+    promptAsync();
   };
 
   const resetPassword = (email) => {
@@ -86,7 +106,6 @@ export const AuthProvider = ({ children }) => {
         signup,
         login,
         user,
-        logout,
         loading,
         loginWithGoogle,
         resetPassword,
