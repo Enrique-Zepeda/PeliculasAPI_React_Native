@@ -55,7 +55,7 @@ export const LoginScreen = ({ navigation }) => {
         setError("Credenciales invalidas");
       }
       if (error.code === "auth/too-many-requests") {
-        setError("Demasiados intenos ¿Olvidaste la contraseña?");
+        setError("Demasiados intentos ¿Olvidaste la contraseña?");
       }
       if (error.message === "auth/email-verification") {
         setError("Verifica tu correo");

@@ -48,18 +48,14 @@ export const RegisterScreen = ({ navigation }) => {
       setError("El nombre solo puede contener letras.");
       return;
     }
-    if (!/^[A-Za-z\s]+$/.test(user.name)) {
-      setError("El nombre solo puede contener letras.");
+    if (user.password !== user.password2) {
+      setError("Las contraseñas no coinciden.");
       return;
     }
     if (!isValidPassword(user.password)) {
       setError(
         "La contraseña debe tener al menos 8 caracteres, incluir números y almenos una letra mayúscula."
       );
-      return;
-    }
-    if (user.password !== user.password2) {
-      setError("Las contraseñas no coinciden.");
       return;
     }
     try {
