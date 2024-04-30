@@ -21,7 +21,7 @@ export const LoginScreen = ({ navigation }) => {
     password: "",
   });
   const [hidePassword, setHidePassword] = useState(true);
-  const [error, setError] = useState();
+  const [error, setError] = useState("");
 
   const handleChange = (name, value) => {
     setUser({ ...user, [name]: value });

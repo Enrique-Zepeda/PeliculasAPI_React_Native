@@ -17,7 +17,13 @@ export const FormsRoutes = () => {
         />
         <Stack.Screen
           name="Register"
-          options={{ title: "Volver" }}
+          options={{
+            title: "Volver",
+            headerStyle: {
+              backgroundColor: "#222",
+            },
+            headerTintColor: "#fff",
+          }}
           component={RegisterScreen}
         />
         <Stack.Screen name="search" component={BuscadorPeliculas} />
