@@ -12,6 +12,8 @@ import { Validaciones } from "../components/Validaciones";
 import { styles } from "../styles/RegisterScreenStyles";
 import { useAuth } from "../context/AuthContext";
 import { Ionicons } from "@expo/vector-icons";
+import { FontAwesome } from "@expo/vector-icons";
+import { MaterialIcons } from "@expo/vector-icons";
 
 export const RegisterScreen = ({ navigation }) => {
   const [user, setUser] = useState({
@@ -93,19 +95,41 @@ export const RegisterScreen = ({ navigation }) => {
       </View>
       <Text style={styles.title}>Registrarse</Text>
       {error && <Validaciones message={error} />}
-      <TextInput
-        style={styles.input}
-        placeholder="Nombre"
-        onChangeText={(value) => handleInputChange("name", value)}
-        value={user.name}
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Correo"
-        onChangeText={(value) => handleInputChange("email", value)}
-        value={user.email}
-      />
       <View style={styles.inputContainer}>
+        <FontAwesome
+          name="user-circle"
+          size={30}
+          color="#6C63FF"
+          style={styles.icon1}
+        />
+        <TextInput
+          style={styles.input}
+          placeholder="Nombre"
+          onChangeText={(value) => handleInputChange("name", value)}
+          value={user.name}
+        />
+      </View>
+      <View style={styles.inputContainer}>
+        <MaterialIcons
+          name="email"
+          size={30}
+          color="#6C63FF"
+          style={styles.icon1}
+        />
+        <TextInput
+          style={styles.input}
+          placeholder="Correo"
+          onChangeText={(value) => handleInputChange("email", value)}
+          value={user.email}
+        />
+      </View>
+      <View style={styles.inputContainer}>
+        <MaterialIcons
+          name="password"
+          size={30}
+          color="#6C63FF"
+          style={styles.icon1}
+        />
         <TextInput
           style={styles.input}
           placeholder="Contraseña"
@@ -125,6 +149,12 @@ export const RegisterScreen = ({ navigation }) => {
         </TouchableOpacity>
       </View>
       <View style={styles.inputContainer}>
+        <MaterialIcons
+          name="password"
+          size={30}
+          color="#6C63FF"
+          style={styles.icon1}
+        />
         <TextInput
           style={styles.input}
           placeholder="Contraseña"

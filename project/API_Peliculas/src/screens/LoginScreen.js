@@ -11,6 +11,8 @@ import { Validaciones } from "../components/Validaciones";
 import { styles } from "../styles/LoginScreenStyles";
 import { useAuth } from "../context/AuthContext";
 import { Ionicons } from "@expo/vector-icons";
+import { MaterialIcons } from "@expo/vector-icons";
+
 export const LoginScreen = ({ navigation }) => {
   const { login } = useAuth();
 
@@ -77,14 +79,27 @@ export const LoginScreen = ({ navigation }) => {
       <Text style={styles.title}>Inicio de Sesion</Text>
 
       {error && <Validaciones message={error} />}
-
-      <TextInput
-        style={styles.input}
-        placeholder="Correo"
-        onChangeText={(value) => handleChange("email", value)}
-        value={user.email}
-      />
       <View style={styles.inputContainer}>
+        <MaterialIcons
+          name="email"
+          size={30}
+          color="#6C63FF"
+          style={styles.icon1}
+        />
+        <TextInput
+          style={styles.input}
+          placeholder="Correo"
+          onChangeText={(value) => handleChange("email", value)}
+          value={user.email}
+        />
+      </View>
+      <View style={styles.inputContainer}>
+        <MaterialIcons
+          name="password"
+          size={30}
+          color="#6C63FF"
+          style={styles.icon1}
+        />
         <TextInput
           style={styles.input}
           placeholder="Contraseña"

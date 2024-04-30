@@ -21,7 +21,7 @@ export const styles = StyleSheet.create({
     textAlign: "center",
   },
   input: {
-    width: "80%",
+    width: "75%",
     height: 50,
     borderWidth: 1,
     borderColor: "#000000",
@@ -33,7 +33,7 @@ export const styles = StyleSheet.create({
     paddingRight: 50,
   },
   button: {
-    width: "80%",
+    width: "83%",
     height: 50,
     backgroundColor: "#6C63FF",
     alignItems: "center",
@@ -68,6 +68,10 @@ export const styles = StyleSheet.create({
   icon: {
     position: "absolute",
     right: 10,
+    paddingBottom: 18,
+  },
+  icon1: {
+    right: 5,
     paddingBottom: 18,
   },
 });
