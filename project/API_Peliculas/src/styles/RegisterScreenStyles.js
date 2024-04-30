@@ -44,8 +44,8 @@ export const styles = StyleSheet.create({
   },
   logo: {
     width: 200,
-    height: 100,
-    marginTop: 50,
+    height: 160,
+    marginTop: -50,
   },
   buttonContainer: {
     alignItems: "center",

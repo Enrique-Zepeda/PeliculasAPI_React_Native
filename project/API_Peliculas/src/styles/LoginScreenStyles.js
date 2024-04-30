@@ -66,9 +66,19 @@ export const styles = StyleSheet.create({
     justifyContent: "center",
     marginTop: 20,
   },
-  loginText: {
+  passwordContainer: {
+    flexDirection: "column",
+    alignItems: "flex-end",
+    width: "75%",
+  },
+  resetText: {
     color: "#FFFFFF",
-    marginBottom: 10,
+    fontSize: 14,
+    textAlign: "right",
+    textDecorationLine: "underline",
+    paddingVertical: 0,
+    marginRight: 10,
+    marginTop: -20,
   },
   logoContainer: {
     flexDirection: "row",

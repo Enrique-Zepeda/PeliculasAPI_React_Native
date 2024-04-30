@@ -6,6 +6,7 @@ import {
   Image,
   Pressable,
   TouchableOpacity,
+  Alert,
 } from "react-native";
 import { Validaciones } from "../components/Validaciones";
 import { styles } from "../styles/LoginScreenStyles";
@@ -14,7 +15,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
 
 export const LoginScreen = ({ navigation }) => {
-  const { login } = useAuth();
+  const { login, resetPassword } = useAuth();
 
   const [user, setUser] = useState({
     email: "",
@@ -25,6 +26,18 @@ export const LoginScreen = ({ navigation }) => {
 
   const handleChange = (name, value) => {
     setUser({ ...user, [name]: value });
+  };
+
+  const recoveryPassword = async () => {
+    if (!user.email) {
+      setError("Ingrese un correo para restablecer la contraseña");
+      return;
+    }
+    try {
+      resetPassword(user.email);
+      alert("Se ha enviado un correo para restablecer tu contraseña");
+      setError("");
+    } catch (error) {}
   };
 
   const handleLogin = async () => {
@@ -118,7 +131,11 @@ export const LoginScreen = ({ navigation }) => {
           />
         </TouchableOpacity>
       </View>
-      {/* En la version 3 tendremos que llamar a este navigate HomeScreen */}
+      <View style={styles.passwordContainer}>
+        <Text style={styles.resetText} onPress={recoveryPassword}>
+          ¿Olvidaste tu contraseña?
+        </Text>
+      </View>
       <Pressable style={styles.button} onPress={handleLogin}>
         <Text style={styles.textPressable}>Iniciar Sesion</Text>
       </Pressable>
