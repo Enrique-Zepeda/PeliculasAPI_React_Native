@@ -22,6 +22,7 @@ export const styles = StyleSheet.create({
   input: {
     width: "65%",
     height: 50,
+    color: "#FFFFFF",
     borderWidth: 1,
     borderColor: "#000000",
     borderRadius: 5,
@@ -72,7 +73,7 @@ export const styles = StyleSheet.create({
   },
   resetText: {
     color: "#FFFFFF",
-    fontSize: 14,
+    fontSize: 16,
     textAlign: "right",
     textDecorationLine: "underline",
     paddingVertical: 0,

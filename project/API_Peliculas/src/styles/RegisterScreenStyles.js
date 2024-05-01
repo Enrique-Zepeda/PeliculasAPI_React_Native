@@ -38,6 +38,7 @@ export const styles = StyleSheet.create({
   },
   input: {
     width: "75%",
+    color: "#FFFFFF",
     height: 50,
     borderWidth: 1,
     borderColor: "#000000",

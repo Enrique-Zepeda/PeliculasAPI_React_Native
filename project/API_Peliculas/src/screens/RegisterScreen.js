@@ -111,7 +111,7 @@ export const RegisterScreen = ({ navigation }) => {
         <FontAwesome
           name="user-circle"
           size={30}
-          color="#6C63FF"
+          color="#9993FF"
           style={styles.icon1}
         />
         <TextInput
@@ -125,7 +125,7 @@ export const RegisterScreen = ({ navigation }) => {
         <MaterialIcons
           name="email"
           size={30}
-          color="#6C63FF"
+          color="#9993FF"
           style={styles.icon1}
         />
         <TextInput
@@ -139,7 +139,7 @@ export const RegisterScreen = ({ navigation }) => {
         <MaterialIcons
           name="password"
           size={30}
-          color="#6C63FF"
+          color="#9993FF"
           style={styles.icon1}
         />
         <TextInput
@@ -156,7 +156,7 @@ export const RegisterScreen = ({ navigation }) => {
           <Ionicons
             name={hidePassword ? "eye-off" : "eye"}
             size={24}
-            color="#6C63FF"
+            color="#9993FF"
           />
         </TouchableOpacity>
       </View>
@@ -164,7 +164,7 @@ export const RegisterScreen = ({ navigation }) => {
         <MaterialIcons
           name="password"
           size={30}
-          color="#6C63FF"
+          color="#9993FF"
           style={styles.icon1}
         />
         <TextInput
@@ -181,7 +181,7 @@ export const RegisterScreen = ({ navigation }) => {
           <Ionicons
             name={hidePassword2 ? "eye-off" : "eye"}
             size={24}
-            color="#6C63FF"
+            color="#9993FF"
           />
         </TouchableOpacity>
       </View>
