@@ -14,10 +14,11 @@ import { styles } from "../styles/LoginScreenStyles";
 import { useAuth } from "../context/AuthContext";
 import { Ionicons } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
-import { BackGround } from "../styles/BackGround";
+import { BackGround } from "../styles/animations/BackGround";
 
 export const LoginScreen = ({ navigation }) => {
   const { login, resetPassword } = useAuth();
+  const [loading, setLoading] = useState(false);
 
   const [user, setUser] = useState({
     email: "",
@@ -39,20 +40,25 @@ export const LoginScreen = ({ navigation }) => {
       resetPassword(user.email);
       Alert.alert("Se ha enviado un correo para restablecer tu contraseña");
       setError("");
-    } catch (error) {}
+    } catch (error) {
+      console.log(Error.code);
+    }
   };
 
   const handleLogin = async () => {
     setError("");
+    setLoading(true);
     if (!user.email || !user.password) {
       setError("Todos los campos son obligatorios.");
       return;
     }
     try {
       await login(user.email, user.password);
-      navigation.navigate("search");
+      setLoading(false);
+      navigation.navigate("SuccessAnimation");
     } catch (error) {
       console.log(error.code);
+      setLoading(false);
       if (error.code === "auth/missing-password") {
         setError("Porfavor ingresa tu contraseña");
       }

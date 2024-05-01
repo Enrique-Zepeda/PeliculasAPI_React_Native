@@ -9,7 +9,7 @@ import {
 } from "react-native";
 import { styles } from "../styles/BuscadorPeliculasStyles";
 
-export const BuscadorPeliculas = () => {
+export const BuscadorPeliculas = ({ navigation }) => {
   const urlBase = "https://api.themoviedb.org/3/search/movie";
   const API_KEY = "f2eade83c3c75e944b3a211c852eb69c";
 
@@ -34,6 +34,12 @@ export const BuscadorPeliculas = () => {
 
   return (
     <View style={styles.container}>
+      <Pressable
+        style={styles.boton}
+        onPress={() => navigation.navigate("login")}
+      >
+        <Text style={styles.textoBoton}>login</Text>
+      </Pressable>
       <Text style={styles.title}>Buscador de Películas</Text>
       <View style={styles.searchSection}>
         <TextInput

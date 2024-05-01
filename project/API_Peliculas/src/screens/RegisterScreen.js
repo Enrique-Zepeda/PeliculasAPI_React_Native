@@ -14,7 +14,7 @@ import { useAuth } from "../context/AuthContext";
 import { Ionicons } from "@expo/vector-icons";
 import { FontAwesome } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
-import { BackGround } from "../styles/BackGround";
+import { BackGround } from "../styles/animations/BackGround";
 
 export const RegisterScreen = ({ navigation }) => {
   const [user, setUser] = useState({
