@@ -34,7 +34,7 @@ export const BuscadorPeliculas = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Buscador de Películas Prueba</Text>
+      <Text style={styles.title}>Buscador de Películas</Text>
       <View style={styles.searchSection}>
         <TextInput
           style={styles.input}

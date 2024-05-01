@@ -26,7 +26,16 @@ export const FormsRoutes = () => {
           }}
           component={RegisterScreen}
         />
-        <Stack.Screen name="search" component={BuscadorPeliculas} />
+        <Stack.Screen
+          name="search"
+          component={BuscadorPeliculas}
+          options={{
+            headerStyle: {
+              backgroundColor: "#222",
+            },
+            headerTintColor: "#fff",
+          }}
+        />
         {/*en la version 3 tendremos que llamar a este componenre HomeScren y desde ahi crear un drawer para la creacion de los demas tabs ahoria por default solo navega al buscador de peliculas  */}
       </Stack.Navigator>
     </AuthProvider>

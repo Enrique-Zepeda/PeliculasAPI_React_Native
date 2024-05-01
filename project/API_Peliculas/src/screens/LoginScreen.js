@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
   Alert,
 } from "react-native";
+import { AnimatedButton } from "../components/AnimatedPressable";
 import { Validaciones } from "../components/Validaciones";
 import { styles } from "../styles/LoginScreenStyles";
 import { useAuth } from "../context/AuthContext";
@@ -35,7 +36,7 @@ export const LoginScreen = ({ navigation }) => {
     }
     try {
       resetPassword(user.email);
-      alert("Se ha enviado un correo para restablecer tu contraseña");
+      Alert.alert("Se ha enviado un correo para restablecer tu contraseña");
       setError("");
     } catch (error) {}
   };

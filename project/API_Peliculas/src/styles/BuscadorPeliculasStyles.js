@@ -3,11 +3,14 @@ import { StyleSheet } from "react-native";
 export const styles = StyleSheet.create({
   container: {
     padding: 20,
+    backgroundColor: "#333",
+    height: "100%",
   },
   title: {
     fontSize: 24,
     marginBottom: 20,
     textAlign: "center",
+    color: "#fff",
   },
   searchSection: {
     flexDirection: "row",
