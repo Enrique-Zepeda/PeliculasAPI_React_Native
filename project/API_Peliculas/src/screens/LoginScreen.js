@@ -8,12 +8,13 @@ import {
   TouchableOpacity,
   Alert,
 } from "react-native";
-import { AnimatedButton } from "../components/AnimatedPressable";
+// import { AnimatedButton } from "../components/AnimatedPressable";
 import { Validaciones } from "../components/Validaciones";
 import { styles } from "../styles/LoginScreenStyles";
 import { useAuth } from "../context/AuthContext";
 import { Ionicons } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
+import { BackGround } from "../styles/BackGround";
 
 export const LoginScreen = ({ navigation }) => {
   const { login, resetPassword } = useAuth();
@@ -81,6 +82,7 @@ export const LoginScreen = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
+      <BackGround />
       <View style={styles.logoContainer}>
         <Image
           style={styles.logo}

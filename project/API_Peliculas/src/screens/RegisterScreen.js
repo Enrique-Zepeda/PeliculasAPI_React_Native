@@ -14,6 +14,7 @@ import { useAuth } from "../context/AuthContext";
 import { Ionicons } from "@expo/vector-icons";
 import { FontAwesome } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
+import { BackGround } from "../styles/BackGround";
 
 export const RegisterScreen = ({ navigation }) => {
   const [user, setUser] = useState({
@@ -84,6 +85,17 @@ export const RegisterScreen = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
+      <BackGround />
+      <View style={styles.header}>
+        <TouchableOpacity onPress={() => navigation.navigate("login")}>
+          <Ionicons
+            name="chevron-back"
+            size={40}
+            color="black"
+            style={styles.headerShown}
+          />
+        </TouchableOpacity>
+      </View>
       <View style={styles.logoContainer}>
         <Image
           style={styles.logo}

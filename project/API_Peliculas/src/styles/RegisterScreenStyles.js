@@ -5,7 +5,23 @@ export const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "#252222",
+  },
+  header: {
+    width: "100%",
+    height: 50,
+    flexDirection: "row",
+  },
+  headerShown: {
+    textAlign: "left",
+    marginTop: -75,
+    marginLeft: 3,
+  },
+  headerShown1: {
+    fontSize: 30,
+    textAlign: "left",
+    color: "#FFFFFF",
+    marginTop: -50,
+    marginLeft: 10,
   },
   title: {
     fontSize: 32,

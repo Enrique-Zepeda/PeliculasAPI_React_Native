@@ -1,14 +1,16 @@
+import { View } from "react-native";
 import { LoginScreen } from "../screens/LoginScreen";
 import { RegisterScreen } from "../screens/RegisterScreen.js";
 import { createStackNavigator } from "@react-navigation/stack";
 import { BuscadorPeliculas } from "../components/BuscadorPeliculas.js";
 import { AuthProvider } from "../context/AuthContext.js";
-
+import { BackGround } from "../styles/BackGround.js";
 const Stack = createStackNavigator();
 
 export const FormsRoutes = () => {
   return (
     <AuthProvider>
+      <BackGround />
       <Stack.Navigator>
         <Stack.Screen
           name="login"
@@ -17,13 +19,7 @@ export const FormsRoutes = () => {
         />
         <Stack.Screen
           name="Register"
-          options={{
-            title: "Volver",
-            headerStyle: {
-              backgroundColor: "#222",
-            },
-            headerTintColor: "#fff",
-          }}
+          options={{ headerShown: false }}
           component={RegisterScreen}
         />
         <Stack.Screen
