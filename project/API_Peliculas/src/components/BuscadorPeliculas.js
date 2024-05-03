@@ -36,10 +36,10 @@ export const BuscadorPeliculas = () => {
 
   return (
     <View style={styles.container}>
-      <Pressable
+      {/* <Pressable
         style={styles.boton}
-        onPress={() => navigation.openDrawer()} // Agrega este botón para abrir el drawer
-      ></Pressable>
+        onPress={() => navigation.openDrawer()}
+      ></Pressable> */}
       <Pressable
         style={styles.boton}
         onPress={() => navigation.navigate("login")}
