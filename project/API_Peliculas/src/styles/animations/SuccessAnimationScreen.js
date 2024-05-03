@@ -20,7 +20,7 @@ export const SuccessAnimationScreen = ({ navigation }) => {
           height: "80%",
         }}
         onAnimationFinish={() => {
-          navigation.navigate("search");
+          navigation.navigate("Drawer");
         }}
       />
     </View>

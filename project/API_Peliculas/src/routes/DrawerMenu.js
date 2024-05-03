@@ -1,29 +1,17 @@
+import React from "react";
 import { createDrawerNavigator } from "@react-navigation/drawer";
-import { View, Text } from "react-native";
-
-function Feed() {
-  return (
-    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-      <Text>Feed Screen</Text>
-    </View>
-  );
-}
-
-function Article() {
-  return (
-    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-      <Text>Article Screen</Text>
-    </View>
-  );
-}
+import { BuscadorPeliculas } from "../components/BuscadorPeliculas";
+import { ProfileScreen } from "../screens/ProfileScreen";
 
 const Drawer = createDrawerNavigator();
 
-export default function DrawerMenu() {
+const DrawerMenu = () => {
   return (
-    <Drawer.Navigator>
-      <Drawer.Screen name="Feed" component={Feed} />
-      <Drawer.Screen name="Article" component={Article} />
+    <Drawer.Navigator initialRouteName="BuscadorPeliculas">
+      <Drawer.Screen name="BuscadorPeliculas" component={BuscadorPeliculas} />
+      <Drawer.Screen name="Perfil" component={ProfileScreen} />
     </Drawer.Navigator>
   );
-}
+};
+
+export default DrawerMenu;
