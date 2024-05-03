@@ -8,8 +8,10 @@ import {
   Image,
 } from "react-native";
 import { styles } from "../styles/BuscadorPeliculasStyles";
+import { useNavigation } from "@react-navigation/native";
 
-export const BuscadorPeliculas = ({ navigation }) => {
+export const BuscadorPeliculas = () => {
+  const navigation = useNavigation();
   const urlBase = "https://api.themoviedb.org/3/search/movie";
   const API_KEY = "f2eade83c3c75e944b3a211c852eb69c";
 

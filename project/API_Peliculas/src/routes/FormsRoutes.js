@@ -5,6 +5,8 @@ import { BuscadorPeliculas } from "../components/BuscadorPeliculas.js";
 import { AuthProvider } from "../context/AuthContext.js";
 import { BackGround } from "../styles/animations/BackGround.js";
 import { SuccessAnimationScreen } from "../styles/animations/SuccessAnimationScreen.js";
+import DrawerMenu from "./DrawerMenu.js";
+
 const Stack = createStackNavigator();
 
 export const FormsRoutes = () => {
@@ -23,22 +25,15 @@ export const FormsRoutes = () => {
           component={RegisterScreen}
         />
         <Stack.Screen
-          name="search"
-          component={BuscadorPeliculas}
-          options={{
-            headerStyle: {
-              backgroundColor: "#222",
-            },
-            headerShown: false,
-            headerTintColor: "#fff",
-          }}
+          name="Drawer"
+          options={{ headerShown: false }}
+          component={DrawerMenu}
         />
         <Stack.Screen
           name="SuccessAnimation"
           component={SuccessAnimationScreen}
           options={{ headerShown: false }}
         />
-        {/*en la version 3 tendremos que llamar a este componenre HomeScren y desde ahi crear un drawer para la creacion de los demas tabs ahoria por default solo navega al buscador de peliculas  */}
       </Stack.Navigator>
     </AuthProvider>
   );
