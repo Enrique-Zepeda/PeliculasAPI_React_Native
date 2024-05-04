@@ -80,15 +80,28 @@ export const styles = StyleSheet.create({
   inputContainer: {
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: "center",
+    position: "relative",
+    height: 50,
+    width: "100%",
+    paddingLeft: 50,
+    paddingRight: 50,
+    marginBottom: 15,
   },
   icon: {
     position: "absolute",
-    right: 10,
-    paddingBottom: 18,
+    right: 15, // Asegúrate de que esto alinee el ícono del ojo a la derecha dentro del contenedor
+    top: "50%",
+    transform: [{ translateY: -12 }], // Ajusta para centrar verticalmente
   },
-  icon1: {
-    right: 5,
-    paddingBottom: 18,
+  icon1Container: {
+    position: "absolute",
+    left: 63, // Ajusta este valor para mover el ícono de la contraseña más a la izquierda si es necesario
+    top: "50%",
+    transform: [{ translateY: -15 }], // Ajusta para centrar verticalmente
+  },
+  icon2Container: {
+    position: "absolute",
+    right: 45, // Ajusta este valor para mover el ícono de la contraseña más a la izquierda si es necesario
+    top: "50%",
   },
 });

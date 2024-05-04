@@ -15,6 +15,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { FontAwesome } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
 import { BackGround } from "../styles/animations/BackGround";
+import { NativeBaseProvider, Box, Input } from "native-base";
 
 export const RegisterScreen = ({ navigation }) => {
   const [user, setUser] = useState({
@@ -84,110 +85,129 @@ export const RegisterScreen = ({ navigation }) => {
   };
 
   return (
-    <View style={styles.container}>
-      <BackGround />
-      <View style={styles.header}>
-        <TouchableOpacity onPress={() => navigation.navigate("login")}>
-          <Ionicons
-            name="chevron-back"
-            size={40}
-            color="black"
-            style={styles.headerShown}
+    <NativeBaseProvider>
+      <View style={styles.container}>
+        <BackGround />
+        <View style={styles.header}>
+          <TouchableOpacity onPress={() => navigation.navigate("login")}>
+            <Ionicons
+              name="chevron-back"
+              size={40}
+              color="black"
+              style={styles.headerShown}
+            />
+          </TouchableOpacity>
+        </View>
+        <View style={styles.logoContainer}>
+          <Image
+            style={styles.logo}
+            source={{
+              uri: "https://filmapp.app/wp-content/uploads/2022/09/film-app-apk.png",
+            }}
+            resizeMode="contain"
           />
-        </TouchableOpacity>
-      </View>
-      <View style={styles.logoContainer}>
-        <Image
-          style={styles.logo}
-          source={{
-            uri: "https://filmapp.app/wp-content/uploads/2022/09/film-app-apk.png",
-          }}
-          resizeMode="contain"
-        />
-      </View>
-      <Text style={styles.title}>Registrarse</Text>
-      {error && <Validaciones message={error} />}
-      <View style={styles.inputContainer}>
-        <FontAwesome
-          name="user-circle"
-          size={30}
-          color="#9993FF"
-          style={styles.icon1}
-        />
-        <TextInput
-          style={styles.input}
-          placeholder="Nombre"
-          onChangeText={(value) => handleInputChange("name", value)}
-          value={user.name}
-        />
-      </View>
-      <View style={styles.inputContainer}>
-        <MaterialIcons
-          name="email"
-          size={30}
-          color="#9993FF"
-          style={styles.icon1}
-        />
-        <TextInput
-          style={styles.input}
-          placeholder="Correo"
-          onChangeText={(value) => handleInputChange("email", value)}
-          value={user.email}
-        />
-      </View>
-      <View style={styles.inputContainer}>
-        <MaterialIcons
-          name="password"
-          size={30}
-          color="#9993FF"
-          style={styles.icon1}
-        />
-        <TextInput
-          style={styles.input}
-          placeholder="Contraseña"
-          secureTextEntry={hidePassword}
-          onChangeText={(value) => handleInputChange("password", value)}
-          value={user.password}
-        />
-        <TouchableOpacity
-          onPress={() => setHidePassword(!hidePassword)}
-          style={styles.icon}
-        >
-          <Ionicons
-            name={hidePassword ? "eye-off" : "eye"}
-            size={24}
-            color="#9993FF"
+        </View>
+        <Text style={styles.title}>Registrarse</Text>
+        {error && <Validaciones message={error} />}
+
+        <Box style={styles.inputContainer}>
+          <Box style={styles.icon1Container}>
+            <FontAwesome name="user-circle" size={30} color="#9993FF" />
+          </Box>
+          <Input
+            w="100%"
+            size="md"
+            variant="rounded"
+            pl="12"
+            color="white"
+            placeholderTextColor="#ccc"
+            placeholder="Nombre"
+            onChangeText={(value) => handleInputChange("name", value)}
+            value={user.name}
           />
-        </TouchableOpacity>
-      </View>
-      <View style={styles.inputContainer}>
-        <MaterialIcons
-          name="password"
-          size={30}
-          color="#9993FF"
-          style={styles.icon1}
-        />
-        <TextInput
-          style={styles.input}
-          placeholder="Contraseña"
-          secureTextEntry={hidePassword2}
-          onChangeText={(value) => handleInputChange("password2", value)}
-          value={user.password2}
-        />
-        <TouchableOpacity
-          onPress={() => setHidePassword2(!hidePassword2)}
-          style={styles.icon}
-        >
-          <Ionicons
-            name={hidePassword2 ? "eye-off" : "eye"}
-            size={24}
-            color="#9993FF"
+        </Box>
+
+        <Box style={styles.inputContainer}>
+          <Box style={styles.icon1Container}>
+            <MaterialIcons name="email" size={30} color="#9993FF" />
+          </Box>
+          <Input
+            w="100%"
+            size="md"
+            variant="rounded"
+            pl="12"
+            color="white"
+            placeholderTextColor="#ccc"
+            placeholder="Correo"
+            onChangeText={(value) => handleInputChange("email", value)}
+            value={user.email}
           />
-        </TouchableOpacity>
+        </Box>
+
+        <Box style={styles.inputContainer}>
+          <Box style={styles.icon1Container}>
+            <MaterialIcons name="password" size={30} color="#9993FF" />
+          </Box>
+          <Input
+            w="100%"
+            size="md"
+            variant="rounded"
+            pl="12"
+            color="white"
+            placeholderTextColor="#ccc"
+            placeholder="Contraseña"
+            secureTextEntry={hidePassword}
+            onChangeText={(value) => handleInputChange("password", value)}
+            value={user.password}
+          />
+          <Box style={styles.icon2Container}>
+            <TouchableOpacity
+              onPress={() => setHidePassword(!hidePassword)}
+              style={styles.icon}
+            >
+              <Ionicons
+                name={hidePassword ? "eye-off" : "eye"}
+                size={24}
+                color="#9993FF"
+              />
+            </TouchableOpacity>
+          </Box>
+        </Box>
+
+        <Box style={styles.inputContainer}>
+          <Box style={styles.icon1Container}>
+            <MaterialIcons name="password" size={30} color="#9993FF" />
+          </Box>
+          <Input
+            w="100%"
+            size="md"
+            variant="rounded"
+            pl="12"
+            color="white"
+            placeholderTextColor="#ccc"
+            placeholder="Contraseña"
+            secureTextEntry={hidePassword2}
+            onChangeText={(value) => handleInputChange("password2", value)}
+            value={user.password2}
+          />
+          <Box style={styles.icon2Container}>
+            <TouchableOpacity
+              onPress={() => setHidePassword2(!hidePassword2)}
+              style={styles.icon}
+            >
+              <Ionicons
+                name={hidePassword2 ? "eye-off" : "eye"}
+                size={24}
+                color="#9993FF"
+              />
+            </TouchableOpacity>
+          </Box>
+        </Box>
+
+        <Pressable style={styles.button} onPress={saveUser}>
+          <Text style={styles.textPressable}>Registrarse</Text>
+        </Pressable>
       </View>
-      <Pressable style={styles.button} onPress={saveUser}>
-        <Text style={styles.textPressable}>Registrarse</Text>
-      </Pressable>
-    </View>
+    </NativeBaseProvider>
   );
 };
