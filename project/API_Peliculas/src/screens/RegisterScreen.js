@@ -15,7 +15,19 @@ import { Ionicons } from "@expo/vector-icons";
 import { FontAwesome } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
 import { BackGround } from "../styles/animations/BackGround";
-import { NativeBaseProvider, Box, Input } from "native-base";
+import {
+  NativeBaseProvider,
+  Box,
+  Input,
+  Center,
+  Alert as NbAlert,
+  VStack,
+  HStack,
+  Text as NbText,
+  IconButton,
+  CloseIcon,
+  Button,
+} from "native-base";
 
 export const RegisterScreen = ({ navigation }) => {
   const [user, setUser] = useState({
@@ -26,6 +38,7 @@ export const RegisterScreen = ({ navigation }) => {
   });
   const [hidePassword, setHidePassword] = useState(true);
   const [hidePassword2, setHidePassword2] = useState(true);
+  const [showAlert, setShowAlert] = useState(false);
   const [error, setError] = useState("");
   const { signup } = useAuth();
 
@@ -64,8 +77,8 @@ export const RegisterScreen = ({ navigation }) => {
     }
     try {
       await signup(user.email, user.password, user.name);
-      Alert.alert("Registro exitoso, Verifica tu correo");
-      navigation.navigate("login");
+      setShowAlert(true);
+      // navigation.navigate("login");
     } catch (error) {
       console.error(error);
       setError(error.message);
@@ -87,6 +100,51 @@ export const RegisterScreen = ({ navigation }) => {
   return (
     <NativeBaseProvider>
       <View style={styles.container}>
+        {showAlert && (
+          <Center style={styles.overlay}>
+            <NbAlert w="90%" maxW="400" status="info" colorScheme="info">
+              <VStack space={2} flexShrink={1} w="100%">
+                <HStack
+                  flexShrink={1}
+                  space={2}
+                  alignItems="center"
+                  justifyContent="space-between"
+                >
+                  <HStack flexShrink={1} space={2} alignItems="center">
+                    <NbAlert.Icon />
+                    <NbText
+                      fontSize="md"
+                      fontWeight="medium"
+                      color="coolGray.800"
+                    >
+                      ¡Registro exitoso! Verifica tu correo.
+                    </NbText>
+                  </HStack>
+                  <IconButton
+                    onPress={() => {
+                      setShowAlert(false);
+                      navigation.navigate("login");
+                    }}
+                    variant="unstyled"
+                    icon={<CloseIcon size="3" />}
+                    _icon={{
+                      color: "coolGray.600",
+                    }}
+                  />
+                </HStack>
+                <Box
+                  pl="6"
+                  _text={{
+                    color: "coolGray.600",
+                  }}
+                >
+                  Por favor, revisa tu correo electrónico para activar tu
+                  cuenta.
+                </Box>
+              </VStack>
+            </NbAlert>
+          </Center>
+        )}
         <BackGround />
         <View style={styles.header}>
           <TouchableOpacity onPress={() => navigation.navigate("login")}>
@@ -204,9 +262,24 @@ export const RegisterScreen = ({ navigation }) => {
           </Box>
         </Box>
 
-        <Pressable style={styles.button} onPress={saveUser}>
-          <Text style={styles.textPressable}>Registrarse</Text>
-        </Pressable>
+        <Button
+          onPress={saveUser}
+          bg="#6C63FF"
+          _text={{
+            color: "#fff",
+            fontSize: 18,
+            fontWeight: "bold",
+          }}
+          _pressed={{
+            bg: "#4F45FF",
+          }}
+          borderRadius="full"
+          height={50}
+          width="75%"
+          marginTop={3}
+        >
+          Registrarse
+        </Button>
       </View>
     </NativeBaseProvider>
   );

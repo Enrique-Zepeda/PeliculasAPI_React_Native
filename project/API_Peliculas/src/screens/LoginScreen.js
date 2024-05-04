@@ -15,7 +15,19 @@ import { useAuth } from "../context/AuthContext";
 import { Ionicons } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
 import { BackGround } from "../styles/animations/BackGround";
-import { NativeBaseProvider, Box, Input } from "native-base";
+import {
+  NativeBaseProvider,
+  Box,
+  Input,
+  Center,
+  Alert as NbAlert,
+  VStack,
+  HStack,
+  Text as NbText,
+  IconButton,
+  CloseIcon,
+  Button,
+} from "native-base";
 
 export const LoginScreen = ({ navigation }) => {
   const { login, resetPassword } = useAuth();
@@ -27,7 +39,7 @@ export const LoginScreen = ({ navigation }) => {
   });
   const [hidePassword, setHidePassword] = useState(true);
   const [error, setError] = useState("");
-
+  const [showAlert, setShowAlert] = useState(false);
   const handleChange = (name, value) => {
     setUser({ ...user, [name]: value });
   };
@@ -39,7 +51,7 @@ export const LoginScreen = ({ navigation }) => {
     }
     try {
       resetPassword(user.email);
-      Alert.alert("Se ha enviado un correo para restablecer tu contraseña");
+      setShowAlert(true);
       setError("");
     } catch (error) {
       console.log(Error.code);
@@ -90,6 +102,50 @@ export const LoginScreen = ({ navigation }) => {
   return (
     <NativeBaseProvider>
       <View style={styles.container}>
+        {showAlert && (
+          <Center style={styles.overlay}>
+            <NbAlert w="90%" maxW="400" status="info" colorScheme="info">
+              <VStack space={2} flexShrink={1} w="100%">
+                <HStack
+                  flexShrink={1}
+                  space={2}
+                  alignItems="center"
+                  justifyContent="space-between"
+                >
+                  <HStack flexShrink={1} space={2} alignItems="center">
+                    <NbAlert.Icon />
+                    <NbText
+                      fontSize="md"
+                      fontWeight="medium"
+                      color="coolGray.800"
+                    >
+                      Correo de recuperación enviado
+                    </NbText>
+                  </HStack>
+                  <IconButton
+                    onPress={() => {
+                      setShowAlert(false);
+                    }}
+                    variant="unstyled"
+                    icon={<CloseIcon size="3" />}
+                    _icon={{
+                      color: "coolGray.600",
+                    }}
+                  />
+                </HStack>
+                <Box
+                  pl="6"
+                  _text={{
+                    color: "coolGray.600",
+                  }}
+                >
+                  Por favor, revisa tu correo electrónico para restablecer tu
+                  contraseña.
+                </Box>
+              </VStack>
+            </NbAlert>
+          </Center>
+        )}
         <BackGround />
         <View style={styles.logoContainer}>
           <Image
@@ -102,7 +158,6 @@ export const LoginScreen = ({ navigation }) => {
         </View>
         <Text style={styles.title}>Inicio de Sesion</Text>
         {error && <Validaciones message={error} />}
-
         <Box style={styles.inputContainer}>
           <Box style={styles.icon1Container}>
             <MaterialIcons name="email" size={30} color="#9993FF" />
@@ -119,7 +174,6 @@ export const LoginScreen = ({ navigation }) => {
             value={user.email}
           />
         </Box>
-
         <Box style={styles.inputContainer}>
           <Box style={styles.icon1Container}>
             <MaterialIcons name="password" size={30} color="#9993FF" />
@@ -154,15 +208,42 @@ export const LoginScreen = ({ navigation }) => {
             ¿Olvidaste tu contraseña?
           </Text>
         </View>
-        <Pressable style={styles.button} onPress={handleLogin}>
-          <Text style={styles.textPressable}>Iniciar Sesion</Text>
-        </Pressable>
-        <Pressable
-          style={styles.button}
-          onPress={() => navigation.navigate("Register")}
+        <Button
+          onPress={handleLogin}
+          bg="#6C63FF"
+          _text={{
+            color: "#fff",
+            fontSize: 18,
+            fontWeight: "bold",
+          }}
+          _pressed={{
+            bg: "#4F45FF",
+          }}
+          borderRadius="full"
+          height={50}
+          width="75%"
+          marginTop={5}
         >
-          <Text style={styles.textPressable}>Registrarse</Text>
-        </Pressable>
+          Iniciar Sesión
+        </Button>
+        <Button
+          onPress={() => navigation.navigate("Register")}
+          bg="#6C63FF"
+          _text={{
+            color: "#fff",
+            fontSize: 18,
+            fontWeight: "bold",
+          }}
+          _pressed={{
+            bg: "#4F45FF",
+          }}
+          borderRadius="full"
+          height={50}
+          width="75%"
+          marginTop={5}
+        >
+          Registrarse
+        </Button>
       </View>
     </NativeBaseProvider>
   );

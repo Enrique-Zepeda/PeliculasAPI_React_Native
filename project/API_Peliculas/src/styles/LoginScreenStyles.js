@@ -38,7 +38,6 @@ export const styles = StyleSheet.create({
     justifyContent: "center",
     borderRadius: 5,
     marginTop: 20,
-    elevation: 3,
   },
   iconContainer: {
     paddingRight: 10,
@@ -107,5 +106,14 @@ export const styles = StyleSheet.create({
     position: "absolute",
     right: 45, // Ajusta este valor para mover el ícono de la contraseña más a la izquierda si es necesario
     top: "50%",
+  },
+  overlay: {
+    position: "absolute",
+    width: "100%",
+    height: "100%",
+    justifyContent: "center",
+    alignItems: "center",
+    zIndex: 1000, // Asegúrate de que zIndex sea suficientemente alto para estar encima de todo
+    backgroundColor: "rgba(0, 0, 0, 0.5)", // Opcional: oscurece el fondo para destacar la alerta
   },
 });
