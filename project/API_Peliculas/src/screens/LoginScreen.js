@@ -15,6 +15,7 @@ import { useAuth } from "../context/AuthContext";
 import { Ionicons } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
 import { BackGround } from "../styles/animations/BackGround";
+import { NativeBaseProvider, Box, Input } from "native-base";
 
 export const LoginScreen = ({ navigation }) => {
   const { login, resetPassword } = useAuth();
@@ -87,73 +88,82 @@ export const LoginScreen = ({ navigation }) => {
   };
 
   return (
-    <View style={styles.container}>
-      <BackGround />
-      <View style={styles.logoContainer}>
-        <Image
-          style={styles.logo}
-          source={{
-            uri: "https://filmapp.app/wp-content/uploads/2022/09/film-app-apk.png",
-          }}
-          resizeMode="contain"
-        />
-      </View>
-      <Text style={styles.title}>Inicio de Sesion</Text>
-
-      {error && <Validaciones message={error} />}
-      <View style={styles.inputContainer}>
-        <MaterialIcons
-          name="email"
-          size={30}
-          color="#9993FF"
-          style={styles.icon1}
-        />
-        <TextInput
-          style={styles.input}
-          placeholder="Correo"
-          onChangeText={(value) => handleChange("email", value)}
-          value={user.email}
-        />
-      </View>
-      <View style={styles.inputContainer}>
-        <MaterialIcons
-          name="password"
-          size={30}
-          color="#9993FF"
-          style={styles.icon1}
-        />
-        <TextInput
-          style={styles.input}
-          placeholder="Contraseña"
-          secureTextEntry={hidePassword}
-          onChangeText={(value) => handleChange("password", value)}
-          value={user.password}
-        />
-        <TouchableOpacity
-          onPress={() => setHidePassword(!hidePassword)}
-          style={styles.icon}
-        >
-          <Ionicons
-            name={hidePassword ? "eye-off" : "eye"}
-            size={24}
-            color="#9993FF"
+    <NativeBaseProvider>
+      <View style={styles.container}>
+        <BackGround />
+        <View style={styles.logoContainer}>
+          <Image
+            style={styles.logo}
+            source={{
+              uri: "https://filmapp.app/wp-content/uploads/2022/09/film-app-apk.png",
+            }}
+            resizeMode="contain"
           />
-        </TouchableOpacity>
+        </View>
+        <Text style={styles.title}>Inicio de Sesion</Text>
+        {error && <Validaciones message={error} />}
+
+        <Box style={styles.inputContainer}>
+          <Box style={styles.icon1Container}>
+            <MaterialIcons name="email" size={30} color="#9993FF" />
+          </Box>
+          <Input
+            w="100%"
+            size="md"
+            variant="rounded"
+            placeholder="Correo"
+            pl="12"
+            color="white"
+            placeholderTextColor="#ccc"
+            onChangeText={(value) => handleChange("email", value)}
+            value={user.email}
+          />
+        </Box>
+
+        <Box style={styles.inputContainer}>
+          <Box style={styles.icon1Container}>
+            <MaterialIcons name="password" size={30} color="#9993FF" />
+          </Box>
+          <Input
+            w="100%"
+            size="md"
+            variant="rounded"
+            placeholder="Contraseña"
+            pl="12"
+            color="white"
+            placeholderTextColor="#ccc"
+            secureTextEntry={hidePassword}
+            onChangeText={(value) => handleChange("password", value)}
+            value={user.password}
+          />
+          <Box style={styles.icon2Container}>
+            <TouchableOpacity
+              onPress={() => setHidePassword(!hidePassword)}
+              style={styles.icon}
+            >
+              <Ionicons
+                name={hidePassword ? "eye-off" : "eye"}
+                size={24}
+                color="#9993FF"
+              />
+            </TouchableOpacity>
+          </Box>
+        </Box>
+        <View style={styles.passwordContainer}>
+          <Text style={styles.resetText} onPress={recoveryPassword}>
+            ¿Olvidaste tu contraseña?
+          </Text>
+        </View>
+        <Pressable style={styles.button} onPress={handleLogin}>
+          <Text style={styles.textPressable}>Iniciar Sesion</Text>
+        </Pressable>
+        <Pressable
+          style={styles.button}
+          onPress={() => navigation.navigate("Register")}
+        >
+          <Text style={styles.textPressable}>Registrarse</Text>
+        </Pressable>
       </View>
-      <View style={styles.passwordContainer}>
-        <Text style={styles.resetText} onPress={recoveryPassword}>
-          ¿Olvidaste tu contraseña?
-        </Text>
-      </View>
-      <Pressable style={styles.button} onPress={handleLogin}>
-        <Text style={styles.textPressable}>Iniciar Sesion</Text>
-      </Pressable>
-      <Pressable
-        style={styles.button}
-        onPress={() => navigation.navigate("Register")}
-      >
-        <Text style={styles.textPressable}>Registrarse</Text>
-      </Pressable>
-    </View>
+    </NativeBaseProvider>
   );
 };

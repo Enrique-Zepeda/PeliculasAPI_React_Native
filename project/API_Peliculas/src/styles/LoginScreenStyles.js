@@ -20,7 +20,6 @@ export const styles = StyleSheet.create({
     textAlign: "center",
   },
   input: {
-    width: "65%",
     height: 50,
     color: "#FFFFFF",
     borderWidth: 1,
@@ -28,7 +27,6 @@ export const styles = StyleSheet.create({
     borderRadius: 5,
     marginBottom: 20,
     paddingLeft: 10,
-    backgroundColor: "#636363",
     elevation: 2,
     paddingRight: 50,
   },
@@ -41,12 +39,6 @@ export const styles = StyleSheet.create({
     borderRadius: 5,
     marginTop: 20,
     elevation: 3,
-  },
-  inputContainer: {
-    width: "80%",
-    flexDirection: "row",
-    alignItems: "center",
-    marginBottom: 20,
   },
   iconContainer: {
     paddingRight: 10,
@@ -78,7 +70,7 @@ export const styles = StyleSheet.create({
     textDecorationLine: "underline",
     paddingVertical: 0,
     marginRight: 10,
-    marginTop: -20,
+    marginTop: -15,
   },
   logoContainer: {
     flexDirection: "row",
@@ -92,15 +84,28 @@ export const styles = StyleSheet.create({
   inputContainer: {
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: "center",
+    position: "relative",
+    height: 50,
+    width: "100%",
+    paddingLeft: 50,
+    paddingRight: 50,
+    marginBottom: 15,
   },
   icon: {
     position: "absolute",
-    right: 10,
-    paddingBottom: 18,
+    right: 15, // Asegúrate de que esto alinee el ícono del ojo a la derecha dentro del contenedor
+    top: "50%",
+    transform: [{ translateY: -12 }], // Ajusta para centrar verticalmente
   },
-  icon1: {
-    right: 5,
-    paddingBottom: 18,
+  icon1Container: {
+    position: "absolute",
+    left: 63, // Ajusta este valor para mover el ícono de la contraseña más a la izquierda si es necesario
+    top: "50%",
+    transform: [{ translateY: -15 }], // Ajusta para centrar verticalmente
+  },
+  icon2Container: {
+    position: "absolute",
+    right: 45, // Ajusta este valor para mover el ícono de la contraseña más a la izquierda si es necesario
+    top: "50%",
   },
 });
