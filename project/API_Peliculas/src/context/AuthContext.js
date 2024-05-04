@@ -9,7 +9,7 @@ import {
   sendPasswordResetEmail,
   sendEmailVerification,
 } from "firebase/auth";
-import { collection, addDoc } from "firebase/firestore";
+import { collection, addDoc, query, where, getDocs } from "firebase/firestore";
 import { auth, db } from "../../credenciales";
 
 export const authContext = createContext();
@@ -17,6 +17,22 @@ export const authContext = createContext();
 export const useAuth = () => {
   const context = useContext(authContext);
   return context;
+};
+
+const fetchUserData = async (uid) => {
+  console.log("Intentando recuperar datos para UID:", uid);
+  const usersRef = collection(db, "Users");
+  const q = query(usersRef, where("uid", "==", uid));
+  const querySnapshot = await getDocs(q);
+
+  if (!querySnapshot.empty) {
+    const userData = querySnapshot.docs[0].data(); // Asumiendo que siempre hay 1 coincidencia
+    console.log("Documento encontrado:", userData);
+    return userData.name; // Asegúrate de que estás devolviendo los datos necesarios
+  } else {
+    console.log("No such document! Final");
+    return null;
+  }
 };
 
 export const AuthProvider = ({ children }) => {
@@ -31,11 +47,12 @@ export const AuthProvider = ({ children }) => {
         password
       );
       await sendEmailVerification(userCredential.user);
-      await addDoc(collection(db, "Users"), {
+      const docRef = await addDoc(collection(db, "Users"), {
         uid: userCredential.user.uid,
         name: name,
         email: email,
       });
+      console.log("Documento creado con ID: ", docRef.id);
     } catch (error) {
       console.error("Ha ocurrido un error durante el registro:", error.message);
       throw error;
@@ -73,11 +90,16 @@ export const AuthProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    onAuthStateChanged(auth, (currentUser) => {
+    const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
       console.log(currentUser);
       setUser(currentUser);
+      if (currentUser) {
+        const userName = await fetchUserData(currentUser.uid);
+        setUser((prevState) => ({ ...prevState, name: userName }));
+      }
       setLoading(false);
     });
+    return () => unsubscribe(); // Limpieza del efecto
   }, []);
 
   return (
