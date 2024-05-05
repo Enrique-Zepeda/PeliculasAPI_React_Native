@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, View } from "react-native";
+import { View } from "react-native";
 import {
   createDrawerNavigator,
   DrawerContentScrollView,
@@ -8,16 +8,18 @@ import {
 } from "@react-navigation/drawer";
 import { NativeBaseProvider, Box, Text, Icon, HStack } from "native-base";
 import LottieView from "lottie-react-native";
-import { BuscadorPeliculas } from "../components/BuscadorPeliculas";
-import { ProfileScreen } from "../screens/ProfileScreen";
+import { BuscadorPeliculas } from "../screens/BuscadorPeliculas";
 import { Ionicons } from "@expo/vector-icons";
+import { FontAwesome } from "@expo/vector-icons";
 import { useAuth } from "../context/AuthContext";
 import { DrawerBackGround } from "../styles/animations/DrawerBackGround";
-import { useNavigation } from "@react-navigation/native";
+import { styles } from "../styles/DrawerStyles";
+import { BuscadorSeries } from "../screens/BuscadorSeries";
+import { BuscadorActores } from "../screens/BuscadorActores";
 
 const CustomDrawerContent = (props) => {
   const { user } = useAuth();
-  const navigation = useNavigation();
+  const { navigation } = props;
   return (
     <NativeBaseProvider>
       <View style={styles.drawerContainer}>
@@ -37,61 +39,38 @@ const CustomDrawerContent = (props) => {
             />
           </Box>
           <Box style={styles.welcomeHeader}>
-            <Text color="white" fontSize="lg" bold mt="-20">
+            <Text color="white" fontSize="2xl" bold mt="-20">
               Bienvenido, {user?.name || "Usuario"}
             </Text>
           </Box>
           <DrawerItemList {...props} />
-          <Box flex={1} height={400} />
-          <Box
-            borderColor="#eee" // Color del borde
-            borderWidth={1} // Grosor del borde
-            borderRadius="full" // Redondez del borde
-            bg="transparent" // Color de fondo
-            m={2} // Margen exterior para separar del resto de contenidos
-            p={2}
-          >
-            <DrawerItem
-              label="Perfil"
-              icon={() => (
-                <Icon
-                  as={Ionicons}
-                  name="person-outline"
-                  color="#9993FF"
-                  size={50}
-                />
-              )}
-              onPress={() => navigation.navigate("Perfil")}
-              labelStyle={{ color: "#FFFFFF" }} // Estilo del texto del ítem 'Perfil'
-            />
-          </Box>
         </DrawerContentScrollView>
+        <Box
+          borderColor="#eee"
+          borderWidth={3}
+          borderRadius="full"
+          bg="transparent"
+          m={2}
+          p={2}
+        >
+          <DrawerItem
+            label="Usuario"
+            icon={() => (
+              <Icon as={Ionicons} name="person" color="#9993FF" size={50} />
+            )}
+            onPress={() => navigation.navigate("Perfil")}
+            labelStyle={{
+              color: "#FFFFFF",
+              fontSize: 20,
+              fontWeight: "bold",
+              fontStyle: "italic",
+            }}
+          />
+        </Box>
       </View>
     </NativeBaseProvider>
   );
 };
-
-const styles = StyleSheet.create({
-  drawerContainer: {
-    flex: 1,
-    backgroundColor: "transparent",
-    overflow: "hidden", // Esto asegura que el contenido que se desborde no sea visible
-  },
-  drawerBackground: {
-    flex: 1,
-    backgroundColor: "transparent",
-  },
-  drawerHeader: {
-    height: 130,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  welcomeHeader: {
-    alignItems: "center",
-    justifyContent: "center",
-    marginTop: 53,
-  },
-});
 
 const Drawer = createDrawerNavigator();
 
@@ -117,6 +96,40 @@ const DrawerMenu = () => {
             drawerLabel: () => (
               <HStack space={3} alignItems="center">
                 <Text color="white">Buscar Películas</Text>
+              </HStack>
+            ),
+            drawerLabelStyle: {
+              color: "#FFFFFF",
+            },
+          }}
+        />
+        <Drawer.Screen
+          name="BuscadorSeries"
+          component={BuscadorSeries}
+          options={{
+            drawerIcon: () => (
+              <Icon as={Ionicons} name="tv-outline" color="#9993FF" size={30} />
+            ),
+            drawerLabel: () => (
+              <HStack space={3} alignItems="center">
+                <Text color="white">Buscar Series</Text>
+              </HStack>
+            ),
+            drawerLabelStyle: {
+              color: "#FFFFFF",
+            },
+          }}
+        />
+        <Drawer.Screen
+          name="BuscadorActores"
+          component={BuscadorActores}
+          options={{
+            drawerIcon: () => (
+              <Icon as={FontAwesome} name="users" color="#9993FF" size={30} />
+            ),
+            drawerLabel: () => (
+              <HStack space={5} alignItems="center">
+                <Text color="white">Buscar Actores</Text>
               </HStack>
             ),
             drawerLabelStyle: {
