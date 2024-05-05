@@ -4,6 +4,7 @@ import {
   createDrawerNavigator,
   DrawerContentScrollView,
   DrawerItemList,
+  DrawerItem,
 } from "@react-navigation/drawer";
 import { NativeBaseProvider, Box, Text, Icon, HStack } from "native-base";
 import LottieView from "lottie-react-native";
@@ -12,9 +13,11 @@ import { ProfileScreen } from "../screens/ProfileScreen";
 import { Ionicons } from "@expo/vector-icons";
 import { useAuth } from "../context/AuthContext";
 import { DrawerBackGround } from "../styles/animations/DrawerBackGround";
+import { useNavigation } from "@react-navigation/native";
 
 const CustomDrawerContent = (props) => {
   const { user } = useAuth();
+  const navigation = useNavigation();
   return (
     <NativeBaseProvider>
       <View style={styles.drawerContainer}>
@@ -39,6 +42,29 @@ const CustomDrawerContent = (props) => {
             </Text>
           </Box>
           <DrawerItemList {...props} />
+          <Box flex={1} height={400} />
+          <Box
+            borderColor="#eee" // Color del borde
+            borderWidth={1} // Grosor del borde
+            borderRadius="full" // Redondez del borde
+            bg="transparent" // Color de fondo
+            m={2} // Margen exterior para separar del resto de contenidos
+            p={2}
+          >
+            <DrawerItem
+              label="Perfil"
+              icon={() => (
+                <Icon
+                  as={Ionicons}
+                  name="person-outline"
+                  color="#9993FF"
+                  size={50}
+                />
+              )}
+              onPress={() => navigation.navigate("Perfil")}
+              labelStyle={{ color: "#FFFFFF" }} // Estilo del texto del ítem 'Perfil'
+            />
+          </Box>
         </DrawerContentScrollView>
       </View>
     </NativeBaseProvider>
@@ -92,23 +118,6 @@ const DrawerMenu = () => {
               <HStack space={3} alignItems="center">
                 <Text color="white">Buscar Películas</Text>
               </HStack>
-            ),
-            drawerLabelStyle: {
-              color: "#FFFFFF",
-            },
-          }}
-        />
-        <Drawer.Screen
-          name="Perfil"
-          component={ProfileScreen}
-          options={{
-            drawerIcon: () => (
-              <Icon
-                as={Ionicons}
-                name="person-outline"
-                color="#9993FF"
-                size={30}
-              />
             ),
             drawerLabelStyle: {
               color: "#FFFFFF",
