@@ -80,6 +80,8 @@ const DrawerMenu = () => {
       <Drawer.Navigator
         initialRouteName="BuscadorPeliculas"
         drawerContent={(props) => <CustomDrawerContent {...props} />}
+        drawerType="slide"
+        overlayColor="transparent"
       >
         <Drawer.Screen
           name="BuscadorPeliculas"
