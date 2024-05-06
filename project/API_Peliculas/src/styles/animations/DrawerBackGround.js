@@ -9,7 +9,7 @@ export const DrawerBackGround = () => {
       loop
       style={{
         position: "absolute",
-        width: screenWidth * 1.996,
+        width: screenWidth * 2.05,
         height: "100%",
         zIndex: -1,
       }}
