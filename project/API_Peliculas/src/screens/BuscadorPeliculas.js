@@ -2,7 +2,15 @@ import React, { useState } from "react";
 import { View, TouchableOpacity, Text, FlatList, Image } from "react-native";
 import { styles } from "../styles/BuscadorPeliculasStyles";
 import { useNavigation } from "@react-navigation/native";
-import { NativeBaseProvider, Box, Input, Button, Heading } from "native-base";
+import {
+  NativeBaseProvider,
+  Box,
+  Input,
+  Button,
+  Heading,
+  AspectRatio,
+  Stack,
+} from "native-base";
 import { Entypo } from "@expo/vector-icons";
 import { BackGround } from "../styles/animations/BackGroundPeliculas";
 
@@ -33,7 +41,6 @@ export const BuscadorPeliculas = () => {
   return (
     <NativeBaseProvider>
       <View style={styles.container}>
-        <BackGround />
         <Heading style={styles.title} size={"3xl"}>
           Buscador de Películas
         </Heading>
@@ -68,18 +75,47 @@ export const BuscadorPeliculas = () => {
           data={peliculas}
           keyExtractor={(item) => item.id.toString()}
           renderItem={({ item }) => (
-            <View style={styles.movieCard}>
-              <Image
-                source={{
-                  uri: `https://image.tmdb.org/t/p/w500${item.poster_path}`,
+            <Box alignItems="center">
+              <Box
+                maxW="80"
+                rounded="lg"
+                overflow="hidden"
+                borderColor="coolGray.200"
+                borderWidth="1"
+                marginTop="10"
+                _dark={{
+                  borderColor: "coolGray.600",
+                  backgroundColor: "gray.700",
                 }}
-                style={styles.movieImage}
-              />
-              <Text style={styles.movieTitle}>{item.title}</Text>
-              <Text>{item.overview}</Text>
-            </View>
+                _web={{
+                  shadow: 2,
+                  borderWidth: 0,
+                }}
+                _light={{
+                  backgroundColor: "gray.50",
+                }}
+              >
+                <Box>
+                  <AspectRatio w="100%" ratio={16 / 9}>
+                    <Image
+                      source={{
+                        uri: `https://image.tmdb.org/t/p/w500${item.poster_path}`,
+                      }}
+                      alt="image"
+                    />
+                  </AspectRatio>
+                </Box>
+                <Stack p="4" space={3}>
+                  <Stack space={2}>
+                    <Heading size="md" ml="-1">
+                      {item.title}
+                    </Heading>
+                  </Stack>
+                  <Text fontWeight="400">{item.overview}</Text>
+                </Stack>
+              </Box>
+            </Box>
           )}
-          style={styles.movieList}
         />
       </View>
     </NativeBaseProvider>
