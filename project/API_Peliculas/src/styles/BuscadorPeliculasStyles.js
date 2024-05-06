@@ -2,12 +2,13 @@ import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
   container: {
-    padding: 20,
-    backgroundColor: "#333",
+    padding: 30,
     height: "100%",
+    backgroundColor: "#333",
   },
   title: {
     fontSize: 24,
+    marginTop: 25,
     marginBottom: 20,
     textAlign: "center",
     color: "#fff",
@@ -15,7 +16,7 @@ export const styles = StyleSheet.create({
   searchSection: {
     flexDirection: "row",
     justifyContent: "center",
-    marginBottom: 20,
+    marginBottom: 10,
   },
   input: {
     width: 300,
@@ -53,5 +54,27 @@ export const styles = StyleSheet.create({
   textoBoton: {
     color: "#ffffff",
     fontSize: 16,
+  },
+  inputContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    position: "relative",
+    height: 50,
+    width: "100%",
+    paddingLeft: 10,
+    paddingRight: 80,
+    marginBottom: 15,
+  },
+  icon1Container: {
+    position: "absolute",
+    left: 20,
+    top: "50%",
+    transform: [{ translateY: -15 }],
+  },
+  searchButton: {
+    position: "absolute",
+    right: 0,
+    top: "39%",
+    transform: [{ translateY: -15 }],
   },
 });

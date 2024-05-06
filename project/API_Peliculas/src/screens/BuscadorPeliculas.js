@@ -1,14 +1,10 @@
 import React, { useState } from "react";
-import {
-  View,
-  TextInput,
-  Pressable,
-  Text,
-  FlatList,
-  Image,
-} from "react-native";
+import { View, TouchableOpacity, Text, FlatList, Image } from "react-native";
 import { styles } from "../styles/BuscadorPeliculasStyles";
 import { useNavigation } from "@react-navigation/native";
+import { NativeBaseProvider, Box, Input, Button, Heading } from "native-base";
+import { Entypo } from "@expo/vector-icons";
+import { BackGround } from "../styles/animations/BackGroundPeliculas";
 
 export const BuscadorPeliculas = () => {
   const navigation = useNavigation();
@@ -35,42 +31,57 @@ export const BuscadorPeliculas = () => {
   };
 
   return (
-    <View style={styles.container}>
-      <Pressable
-        style={styles.boton}
-        onPress={() => navigation.navigate("login")}
-      >
-        <Text style={styles.textoBoton}>login</Text>
-      </Pressable>
-      <Text style={styles.title}>Buscador de Películas</Text>
-      <View style={styles.searchSection}>
-        <TextInput
-          style={styles.input}
-          placeholder="Escribe una película"
-          value={busqueda}
-          onChangeText={handleInputChange}
-        />
-        <Pressable style={styles.boton} onPress={handleSubmit}>
-          <Text style={styles.textoBoton}>Buscar</Text>
-        </Pressable>
-      </View>
-      <FlatList
-        data={peliculas}
-        keyExtractor={(item) => item.id.toString()}
-        renderItem={({ item }) => (
-          <View style={styles.movieCard}>
-            <Image
-              source={{
-                uri: `https://image.tmdb.org/t/p/w500${item.poster_path}`,
+    <NativeBaseProvider>
+      <View style={styles.container}>
+        <BackGround />
+        <Heading style={styles.title} size={"3xl"}>
+          Buscador de Películas
+        </Heading>
+        <Box style={styles.inputContainer}>
+          <Input
+            w="100%"
+            size="md"
+            variant="rounded"
+            placeholder="Escribe una película"
+            pl="12"
+            color="white"
+            placeholderTextColor="#ccc"
+            onChangeText={handleInputChange}
+            value={busqueda}
+          />
+          <Box style={styles.icon1Container}>
+            <TouchableOpacity
+              onPress={() => {
+                navigation.openDrawer();
               }}
-              style={styles.movieImage}
-            />
-            <Text style={styles.movieTitle}>{item.title}</Text>
-            <Text>{item.overview}</Text>
-          </View>
-        )}
-        style={styles.movieList}
-      />
-    </View>
+            >
+              <Entypo name="menu" size={30} color="#9993FF" />
+            </TouchableOpacity>
+          </Box>
+          <Box style={styles.searchButton}>
+            <Button onPress={handleSubmit} borderRadius="full" bg="#6C63FF">
+              <Text style={styles.textoBoton}>Buscar</Text>
+            </Button>
+          </Box>
+        </Box>
+        <FlatList
+          data={peliculas}
+          keyExtractor={(item) => item.id.toString()}
+          renderItem={({ item }) => (
+            <View style={styles.movieCard}>
+              <Image
+                source={{
+                  uri: `https://image.tmdb.org/t/p/w500${item.poster_path}`,
+                }}
+                style={styles.movieImage}
+              />
+              <Text style={styles.movieTitle}>{item.title}</Text>
+              <Text>{item.overview}</Text>
+            </View>
+          )}
+          style={styles.movieList}
+        />
+      </View>
+    </NativeBaseProvider>
   );
 };
