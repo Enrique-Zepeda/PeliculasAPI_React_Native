@@ -8,7 +8,7 @@ export const BackGround = () => {
       loop
       style={{
         position: "absolute",
-        width: "200%",
+        width: "300%",
         height: "100%",
         zIndex: -1,
       }}
