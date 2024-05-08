@@ -1,14 +1,6 @@
 import React, { useState } from "react";
-import {
-  View,
-  Text,
-  TextInput,
-  Image,
-  Pressable,
-  TouchableOpacity,
-  Alert,
-} from "react-native";
-// import { AnimatedButton } from "../components/AnimatedPressable";
+import { View, Text, Image, TouchableOpacity } from "react-native";
+
 import { Validaciones } from "../components/Validaciones";
 import { styles } from "../styles/LoginScreenStyles";
 import { useAuth } from "../context/AuthContext";
@@ -30,7 +22,7 @@ import {
 } from "native-base";
 
 export const LoginScreen = ({ navigation }) => {
-  const { login, resetPassword } = useAuth();
+  const { login, resetPassword, logout } = useAuth();
   const [loading, setLoading] = useState(false);
 
   const [user, setUser] = useState({
@@ -44,7 +36,14 @@ export const LoginScreen = ({ navigation }) => {
     setUser({ ...user, [name]: value });
   };
 
+  const resetForm = () => {
+    setUser({ email: "", password: "" });
+    setError("");
+    setShowAlert(false);
+  };
+
   const recoveryPassword = async () => {
+    setError("");
     if (!user.email) {
       setError("Ingrese un correo para restablecer la contraseña");
       return;
@@ -52,7 +51,6 @@ export const LoginScreen = ({ navigation }) => {
     try {
       resetPassword(user.email);
       setShowAlert(true);
-      setError("");
     } catch (error) {
       console.log(Error.code);
     }
@@ -68,6 +66,7 @@ export const LoginScreen = ({ navigation }) => {
     try {
       await login(user.email, user.password);
       setLoading(false);
+      resetForm();
       navigation.navigate("SuccessAnimation");
     } catch (error) {
       console.log(error.code);

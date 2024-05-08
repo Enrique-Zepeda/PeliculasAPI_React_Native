@@ -78,7 +78,13 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  const logout = () => signOut(auth);
+  const logout = async () => {
+    try {
+      await signOut(auth);
+    } catch (error) {
+      console.error("Error al cerrar sesión:", error);
+    }
+  };
 
   const loginWithGoogle = () => {
     const googleProvider = new GoogleAuthProvider();

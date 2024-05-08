@@ -1,13 +1,5 @@
 import React, { useState } from "react";
-import {
-  View,
-  Text,
-  TextInput,
-  Pressable,
-  Image,
-  Alert,
-  TouchableOpacity,
-} from "react-native";
+import { View, Text, Image, TouchableOpacity } from "react-native";
 import { Validaciones } from "../components/Validaciones";
 import { styles } from "../styles/RegisterScreenStyles";
 import { useAuth } from "../context/AuthContext";
@@ -78,7 +70,6 @@ export const RegisterScreen = ({ navigation }) => {
     try {
       await signup(user.email, user.password, user.name);
       setShowAlert(true);
-      // navigation.navigate("login");
     } catch (error) {
       console.error(error);
       setError(error.message);
