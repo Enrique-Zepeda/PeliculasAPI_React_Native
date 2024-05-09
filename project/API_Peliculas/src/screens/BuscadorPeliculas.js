@@ -52,7 +52,8 @@ export const BuscadorPeliculas = () => {
             placeholder="Escribe una película"
             pl="12"
             color="white"
-            placeholderTextColor="#ccc"
+            placeholderTextColor="white"
+            bg="#333333"
             onChangeText={handleInputChange}
             value={busqueda}
           />
@@ -78,11 +79,11 @@ export const BuscadorPeliculas = () => {
             <Box alignItems="center">
               <Box
                 maxW="80"
-                rounded="lg"
+                rounded="xl"
                 overflow="hidden"
-                borderColor="coolGray.200"
-                borderWidth="1"
-                marginTop="10"
+                borderWidth="0"
+                marginTop="2"
+                marginBottom="5"
                 _dark={{
                   borderColor: "coolGray.600",
                   backgroundColor: "gray.700",
@@ -96,12 +97,13 @@ export const BuscadorPeliculas = () => {
                 }}
               >
                 <Box>
-                  <AspectRatio w="100%" ratio={16 / 9}>
+                  <AspectRatio w="100%" ratio={2 / 3}>
                     <Image
                       source={{
                         uri: `https://image.tmdb.org/t/p/w500${item.poster_path}`,
                       }}
                       alt="image"
+                      resizeMode="cover"
                     />
                   </AspectRatio>
                 </Box>

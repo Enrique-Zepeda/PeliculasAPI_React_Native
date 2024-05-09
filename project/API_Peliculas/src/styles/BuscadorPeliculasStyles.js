@@ -4,7 +4,7 @@ export const styles = StyleSheet.create({
   container: {
     padding: 30,
     height: "100%",
-    backgroundColor: "#555",
+    backgroundColor: "#121212",
   },
   title: {
     fontSize: 24,
@@ -25,6 +25,7 @@ export const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 4,
     marginRight: 10,
+    backgroundColor: "#333333",
   },
   movieList: {
     marginTop: 20,
@@ -75,6 +76,7 @@ export const styles = StyleSheet.create({
     position: "absolute",
     right: 0,
     top: "39%",
+    backgroundColor: "6C63FF",
     transform: [{ translateY: -15 }],
   },
 });
