@@ -87,6 +87,7 @@ const DrawerMenu = () => {
           name="BuscadorPeliculas"
           component={BuscadorPeliculas}
           options={{
+            headerShown: false,
             drawerIcon: () => (
               <Icon
                 as={Ionicons}
