@@ -12,7 +12,6 @@ import {
   Stack,
 } from "native-base";
 import { Entypo } from "@expo/vector-icons";
-import { BackGround } from "../styles/animations/BackGroundPeliculas";
 
 export const BuscadorPeliculas = () => {
   const navigation = useNavigation();
@@ -84,17 +83,6 @@ export const BuscadorPeliculas = () => {
                 borderWidth="0"
                 marginTop="2"
                 marginBottom="5"
-                _dark={{
-                  borderColor: "coolGray.600",
-                  backgroundColor: "gray.700",
-                }}
-                _web={{
-                  shadow: 2,
-                  borderWidth: 0,
-                }}
-                _light={{
-                  backgroundColor: "gray.50",
-                }}
               >
                 <Box>
                   <AspectRatio w="100%" ratio={2 / 3}>
@@ -107,13 +95,15 @@ export const BuscadorPeliculas = () => {
                     />
                   </AspectRatio>
                 </Box>
-                <Stack p="4" space={3}>
+                <Stack p="4" space={3} background={"#555"}>
                   <Stack space={2}>
-                    <Heading size="md" ml="-1">
+                    <Heading size="md" ml="-1" color={"amber.400"}>
                       {item.title}
                     </Heading>
                   </Stack>
-                  <Text fontWeight="400">{item.overview}</Text>
+                  <Text fontWeight="400" style={styles.overview}>
+                    {item.overview}
+                  </Text>
                 </Stack>
               </Box>
             </Box>

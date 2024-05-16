@@ -127,6 +127,7 @@ const DrawerMenu = () => {
           name="BuscadorActores"
           component={BuscadorActores}
           options={{
+            headerShown: false,
             drawerIcon: () => (
               <Icon as={FontAwesome} name="users" color="#9993FF" size={30} />
             ),

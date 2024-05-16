@@ -4,7 +4,7 @@ export const styles = StyleSheet.create({
   container: {
     padding: 30,
     height: "100%",
-    backgroundColor: "#121212",
+    backgroundColor: "#333333",
   },
   title: {
     fontSize: 24,
@@ -78,5 +78,24 @@ export const styles = StyleSheet.create({
     top: "39%",
     backgroundColor: "6C63FF",
     transform: [{ translateY: -15 }],
+  },
+  overview: {
+    color: "#fff",
+  },
+  textMovies: {
+    color: "#fff",
+    fontSize: 14,
+    fontWeight: "bold",
+    marginBottom: 2,
+  },
+  listMovies: {
+    color: "#ccc",
+    fontSize: 14,
+    fontWeight: "bold",
+  },
+  punto: {
+    color: "#ccc",
+    fontSize: 30,
+    fontWeight: "bold",
   },
 });
