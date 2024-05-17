@@ -110,6 +110,7 @@ const DrawerMenu = () => {
           name="BuscadorSeries"
           component={BuscadorSeries}
           options={{
+            headerShown: false,
             drawerIcon: () => (
               <Icon as={Ionicons} name="tv-outline" color="#9993FF" size={30} />
             ),
