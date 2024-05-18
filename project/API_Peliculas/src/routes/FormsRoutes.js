@@ -32,9 +32,19 @@ export const FormsRoutes = () => {
         />
         <Stack.Screen
           name="Perfil"
-          options={{ headerShown: true }}
           component={ProfileScreen}
+          options={{
+            headerShown: true,
+            headerStyle: {
+              backgroundColor: "#333",
+            },
+            headerTintColor: "#fff",
+            headerTitleStyle: {
+              fontWeight: "bold",
+            },
+          }}
         />
+
         <Stack.Screen
           name="SuccessAnimation"
           component={SuccessAnimationScreen}

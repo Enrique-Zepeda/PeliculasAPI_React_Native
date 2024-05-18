@@ -47,7 +47,6 @@ const CustomDrawerContent = (props) => {
         </DrawerContentScrollView>
         <Box
           borderColor="#eee"
-          borderWidth={3}
           borderRadius="full"
           bg="transparent"
           m={2}
