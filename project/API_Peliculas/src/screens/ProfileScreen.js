@@ -74,7 +74,7 @@ export const ProfileScreen = () => {
             </HStack>
           </Box>
 
-          <Button mt={3} colorScheme="primary" onPress={handleLogout}>
+          <Button mt={3} colorScheme="primary">
             Ver Historial
           </Button>
         </VStack>
